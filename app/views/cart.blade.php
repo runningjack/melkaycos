@@ -81,9 +81,14 @@ require_once("inc/init.php");
                         <span class='amount'>&#8358;".number_format($itemRow->price,2,".",",")."</span>
                     </td>
 
-                    <td class='product-status'>
-                        $product->status
-                        </td>
+                    <td class='product-status'>";
+                        if($product->status == 0){
+                            echo "Available";
+                        }elseif($product->status == 1){
+                            echo"Out of Stock";
+                        }
+
+                        echo "</td>
 
                     <td class='product-quantity'>
                         <input type='text' name='product-qty' id='product-qty' value='$itemRow->qty' style='width:50%'>
