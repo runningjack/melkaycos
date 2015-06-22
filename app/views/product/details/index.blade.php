@@ -37,12 +37,17 @@ require_once("inc/init.php");
     <div class="col-sm-8">
         <div class="single-item-body">
             <p class="single-item-title"><h4>{{$myproduct->title}}</h4></p>
+
             <p class="single-item-price">
+                @if(isset($price) && $price >0 )
+                <span>&#8358;{{number_format($price,2,".",",")}}</span>
+                @else
                 <span>&#8358;{{number_format($myproduct->price,2,".",",")}}</span>
+                @endif
+
             </p>
+
         </div>
-
-
         <div class="clearfix"></div>
         <div class="space20">&nbsp;</div>
 
@@ -94,19 +99,26 @@ require_once("inc/init.php");
                 </select>
            <?php
            $size =1;
+           $price = 0;
            if($moptions && count($moptions)>0){
                foreach($moptions as $moption){
                    // $optionvalues = DB::table("options_")
                    if(strtolower($moption['name']) =="buying"){
                        $values = Productoptions::where("product_id",$myproduct->id)->where("option_type","buying")->get();
                        if(count($values) > 0){
+
                            echo "<input type='hidden' name='buyoid' id='pobj' value='".$values[0]['product_option_value_id']."' >
                         <select optid='".$values[0]['product_option_value_id']."' pid='".$myproduct->id."' class='wc-select buying' name='".$moption['name']."'>";
-                           /*echo "<option value=''>--Buying Option--</option>";*/
+                           echo "<option value=''>--Package--</option>";
+                           $p=1;
                            foreach ($values as $value) {
+                               if($p==1){
+                                   $price = $value->price;
+                               }
                                //if($option_value['type'] === "size" ){
                                echo "<option value='".$value->option_value."' price='".$value->price."'>".$value->option_value."</option>";
                                //}
+                               $p++;
                            }
                            echo "</select>";
                        }
@@ -117,7 +129,8 @@ require_once("inc/init.php");
                        if(count($values) >0){
                            echo "<input type='hidden' name='sizeoid'  value='".$values[0]['product_option_value_id']."' >";
                            echo "<select optid='".$moption['product_option_value_id']."' pid='".$myproduct->id."' class='wc-select size' name='".$moption['name']."'>";
-                           /*echo "<option value=''>--Size--</option>";*/
+                           echo "<option value=''>--Size--</option>";
+
                            foreach ($values as $value) {
                                //if($option_value['type'] === "size" ){
                                echo "<option value='".$value->option_value."' price='".$value->price."' pref='".$value->price_prefix."'>".$value->option_value."</option>";
@@ -132,7 +145,7 @@ require_once("inc/init.php");
                        if(count($values)>0 ){
                            echo "<input type='hidden' name='volumeoid'  value='".$values[0]['product_option_value_id']."' >
                         <select optid='".$values[0]['product_option_value_id']."' pid='".$myproduct->id."' class='wc-select volume' name='".$moption['name']."'>";
-                           /* echo "<option value=''>--Volume--</option>";*/
+                           echo "<option value=''>--Volume--</option>";
                            foreach ($values as $value) {
                                //if($option_value['type'] === "size" ){
                                echo "<option value='".$value->option_value."' price='".$value->price."' pref='".$value->price_prefix."'>".$value->option_value."</option>";
@@ -147,8 +160,7 @@ require_once("inc/init.php");
                        if(count($values) > 0){
                            echo "<input type='hidden' name='coloroid'  value='".$values[0]['product_option_value_id']."' >
                         <select optid='".$values[0]['product_option_value_id']."' pid='".$myproduct->id."' class='wc-select color' name='".$moption['name']."'>";
-                           /*  echo "<option value=''>--Color--</option>";*/
-
+                           echo "<option value=''>--Color--</option>";
                            foreach ($values as $value) {
                                //if($option_value['type'] === "size" ){
                                echo "<option value='".$value->option_value."' price='".$value->price."' pref='".$value->price_prefix."'>".$value->option_value."</option>";
@@ -160,7 +172,10 @@ require_once("inc/init.php");
 
                }
            }
+
+
         ?>
+
 
             <a class="add-to-cart" href="javascript:void(0);" pid="{{$myproduct->id}}"><i class="fa fa-shopping-cart"></i></a>
             <div class="clearfix"></div>
