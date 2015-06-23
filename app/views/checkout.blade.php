@@ -205,7 +205,7 @@ require_once ('inc/init.php');
                         <div class="form-block">
                             <label for="shipping_address">Address*</label>
                             <input type="text" id="shipping_address" name="shipping_address" placeholder="Street Address" >
-                            <input type="text" id="shipping_apartment" name="shippin_apartment" placeholder="Apartment, suite, unit etc." >
+                            <input type="text" id="shipping_apartment" name="shipping_apartment" placeholder="Apartment, suite, unit etc." >
                         </div>
 
                         <div class="form-block">

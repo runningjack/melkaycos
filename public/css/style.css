@@ -980,7 +980,7 @@ width:60%;
 overflow:hidden
 }
 
-.form-block #apartment {
+.form-block #apartment, .form-block #shipping_apartment {
 margin-left:200px
 }
 

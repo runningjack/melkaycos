@@ -795,16 +795,21 @@ class HomeController extends BaseController {
                                  <a class='pull-left' href=\"javascript:void(0);\"><img src='".url()."/uploads/images/thumbs/$imgName' alt=''></a>
                                  <div class='media-body'>
                                      <span class='cart-item-title'>".$itemRow->name."</span>";
-                                 if($itemRow->options){
-                                     foreach($itemRow->options as $key=>$value){
-                                        if($value != ""){
-                                            $itemHtml .=$value."&mdash";
-                                        }
-                                     }
-                                 }
+                        $itemHtml .="<span class='cart-item-options'>";
+                        $thml ="";
+                        if($itemRow->options){
+                            foreach($itemRow->options as $key=>$value){
+                                if($value != ""){
+                                    $thml .= " —".$value;
+                                }
+                            }
+                            $thml = preg_replace("/^ —/","",$thml);
+                        }
 
-                        $itemHtml .= "</span>
-                                     <span class='cart-item-amount'>$itemRow->qty*<span>&#8358;".number_format($itemRow->price,2,'.',',')."</span>
+
+                        $itemHtml .= $thml."</span>";
+
+                        $itemHtml .=  "<span class='cart-item-amount'>$itemRow->qty*<span>&#8358;".number_format($itemRow->price,2,'.',',')."</span>
                                  </div>
                              </div>
                          </div>
