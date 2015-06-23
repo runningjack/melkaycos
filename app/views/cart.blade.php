@@ -57,9 +57,6 @@ require_once("inc/init.php");
                         $image_info = pathinfo($source_folder.$product->image);
                         $image_extension = strtolower($image_info["extension"]); //image extension
                         $image_name_only = strtolower($image_info["filename"]);//file name only, no extension
-                        ;
-
-
                         $imgName = $image_name_only."-100x100".".".$image_extension;
 
 
@@ -69,10 +66,30 @@ require_once("inc/init.php");
                         <div class='media'>
                             <img class='pull-left' src='".ASSETS_URL.'/uploads/images/thumbs/'.$imgName."' alt=''>
                             <div class='media-body'>
-                                <p class='font-large table-title'>$product->title</p>
-                                <!--<p class='table-option'>Color: Red</p>
-                                <p class='table-option'>Size: M</p>-->
-                                <!--<a class='table-edit' href='#'>Edit</a>-->
+                                <p class='font-large table-title'>$product->title</p>";
+
+                                if($itemRow->options){
+                                    echo " <p class='table-option ' style='font-size: .8rem'><span class='pink'>";
+                                    $thml ="";
+                                    $z=0;
+                                    foreach($itemRow->options as $key=>$value){
+
+                                        if($value !=""){
+
+                                         $thml .= " —".$value;
+
+                                        }
+                                    }
+                                    $thml = preg_replace("/^ —/","",$thml);
+                                    echo $thml;
+                                    echo "</span></p><p>&nbsp;</p>";
+
+                                }
+
+
+
+                                echo"
+
                         </div>
                         </div>
                     </td>

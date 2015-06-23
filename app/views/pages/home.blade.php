@@ -150,7 +150,7 @@ require_once("inc/init.php");
                     $img2->save($destination_folder."thumbs/".$imgName);
 
 
-                    echo "<a href='".ASSETS_URL."/product/details/".$latest->id."'><img src='".ASSETS_URL."/uploads/images/thumbs/".$imgName."' style='width:262px !important; height:311px !important'></a>";
+                    echo "<a href='".url()."/product/details/".$latest->id."'><img src='".url()."/uploads/images/thumbs/".$imgName."' style='width:262px !important; height:311px !important'></a>";
                     }?>
                 </div>
                 <div class="single-item-body">
@@ -205,8 +205,8 @@ if($latest->image != ""){
                     $img2->save($destination_folder."thumbs/".$imgName);
 
 
-                    echo "<a href='".ASSETS_URL."/product/details/".$latest->id."'>
-                    <img src='".ASSETS_URL."/uploads/images/thumbs/".$imgName."' style='width:262px !important; height:311px !important'></a>";
+                    echo "<a href='".url()."/product/details/".$latest->id."'>
+                    <img src='".url()."/uploads/images/thumbs/".$imgName."' style='width:262px !important; height:311px !important'></a>";
 }
 ?>
 
@@ -281,10 +281,10 @@ if($latest->image != ""){
     </div>
     <div class="col-6 ">
         <div class="beta-banner beta-banner-a">
-            <img src="<?php echo ASSETS_URL?>/uploads/images/banners/banner5.png" alt="">
+            <img src="<?php echo url() ?>/uploads/images/banners/banner5.png" alt="">
             <img
                 class="beta-banner-layer"
-                src="<?php echo ASSETS_URL?>/uploads/images/banners/5/layer1.png"
+                src="<?php echo url() ?>/uploads/images/banners/5/layer1.png"
                 data-animo='{
 										"delay" : 200,
 										"template" : {
@@ -364,8 +364,8 @@ if($latest->image != ""){
                                 $img2->save($destination_folder."thumbs/".$imgName);
 
 
-                                echo "<a href='".ASSETS_URL."/product/details/".$latest->id."'>
-                    <img src='".ASSETS_URL."/uploads/images/thumbs/".$imgName."' style='width:262px !important; height:311px !important'></a>";
+                                echo "<a href='".url()."/product/details/".$latest->id."'>
+                    <img src='".url()."/uploads/images/thumbs/".$imgName."' style='width:262px !important; height:311px !important'></a>";
                             }
                             ?>
                         </div>

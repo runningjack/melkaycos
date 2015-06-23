@@ -117,6 +117,7 @@ $page_css[] = "your_style.css";
                 var volume =""
                 var size =""
                 var weight =""
+                var color =""
                 var optid =""
 
                 if($(this).siblings('select[name="buying"]').length > 0){
@@ -133,10 +134,15 @@ $page_css[] = "your_style.css";
                     optid = ($(this).siblings('select[name="size"]').attr("optid"))
                 }
 
+                if($(this).siblings('select[name="color"]').length > 0){
+                    color = ($(this).siblings('select[name="color"]').val())
+                    optid = ($(this).siblings('select[name="color"]').attr("optid"))
+                }
+
                 var request = $.ajax({
                     url:"",
                     type:"post",
-                    data:{pid:$(this).attr("pid"),qty:$("#qty").val(),buying:buying,volume:volume,size:size,weight:weight,optid:optid},
+                    data:{pid:$(this).attr("pid"),qty:$("#qty").val(),buying:buying,volume:volume,color:color,size:size,weight:weight,optid:optid},
                     dataType:"html"
                 });
                 request.done(function(data){

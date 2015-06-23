@@ -67,11 +67,8 @@ require_once("inc/init.php")
                         <option value="">Select a country…</option>
                         @if($countries)
                         @foreach($countries as $country)
-                        {{--*/ $st = $country->name /*--}}>
-                        @if(Input::old("country") !="")
-                        @if(Input::old("country")==$st)
+                        @if($country->name == "Nigeria")
                         <option value="{{$country->name}}" selected>{{$country->name}}</option>
-                        @endif
                         @else
                         <option value="{{$country->name}}">{{$country->name}}</option>
                         @endif
