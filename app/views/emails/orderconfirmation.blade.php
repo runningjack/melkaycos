@@ -32,13 +32,31 @@
                                     <tbody>
                                     <tr>
                                         <td class="kmImageContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;padding-top:0px;padding-bottom:0;padding-left:9px;padding-right:9px;">
-                                            <img align="left" alt="" class="kmImage" src="" width="" style="border:0;height:auto;line-height:100%;outline:none;text-decoration:none;padding-bottom:0;display:inline;vertical-align:bottom;margin-right:0;" />
+                                            <img align="left" alt="" class="kmImage" src="<?php echo url()."/img/logo.png"; ?>" width="" style="border:0;height:auto;line-height:100%;outline:none;text-decoration:none;padding-bottom:0;display:inline;vertical-align:bottom;margin-right:0;" />
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse">
+            <tbody>
+            <tr>
+                <td style="border-collapse:collapse;padding-top:18px;padding-bottom:18px;padding-left:18px;padding-right:18px">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;border-top-width:1px;border-top-style:solid;border-top-color:#ccc">
+                        <tbody>
+                        <tr><td style="border-collapse:collapse"><span></span></td></tr>
                         </tbody>
                     </table>
                 </td>
@@ -81,10 +99,13 @@
                 <tr>
                     <td class="kmTextContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:#505050;font-family:Helvetica, Arial;font-size:14px;line-height:150%;text-align:left;padding-top:9px;padding-bottom:18px;padding-left:18px;padding-right:18px;">
                         <h3 style="color:#666;display:block;font-family:Helvetica, Arial;font-size:16px;font-style:normal;font-weight:normal;line-height:110%;letter-spacing:normal;margin:0;margin-bottom:9px;text-align:left">Billing Address:</h3>
-                        <address><?php echo isset($shipping_firstname) ? $shipping_firstname : $firstname ?> <?php echo isset($shipping_lastname) ? $shipping_lastname : $lastname ?></address>
-                        <address><?php echo isset($shipping_apartment) ? $shipping_apartment : $apartment ?>,<?php echo isset($shipping_address) ? $shipping_address : $address ?></address>
-                        <address><?php echo isset($shipping_city) ? $shipping_city : $city ?>, <?php echo isset($shipping_state) ? $shipping_state : $state ?></address>
-                        <address><?php echo isset($shipping_country) ? $shipping_country : $country ?></address>
+                        <address><?php echo (isset($shipping_firstname)&& !empty($shipping_firstname)) ? $shipping_firstname : $firstname ?>
+                                 <?php echo (isset($shipping_lastname) && !empty($shipping_lastname)) ? $shipping_lastname : $lastname ?></address>
+                        <address><?php echo (isset($shipping_apartment) && !empty($shipping_apartment)) ? $shipping_apartment : $apartment ?>,
+                                 <?php echo (isset($shipping_address) && !empty($shipping_address)) ? $shipping_address : $address ?></address>
+                        <address><?php echo (isset($shipping_city) && !empty($shipping_city)) ? $shipping_city : $city ?>,
+                                 <?php echo (isset($shipping_state)  && !empty($shipping_state)) ? $shipping_state : $state ?></address>
+                        <address><?php echo (isset($shipping_country) && !empty($shipping_country)) ? $shipping_country : $country ?></address>
                         <p>Your order has been successfully registered.</p>
                         <p>Next steps:</p>
                         <ul>
@@ -164,7 +185,7 @@ if($item->image != ""){
 
     $imgName = $image_name_only."-100x100".".".$image_extension;
 
-    echo "<img align='right' alt='' class='kmImage' src='".url()."/uploads/images/thumbs/".$imgName."' width='180' style='border:0;height:auto;line-height:100%;outline:none;text-decoration:none;padding-bottom:0;display:inline;vertical-align:bottom;margin-left:0;max-width:180px;' />";
+    echo "<a href='".url()."'><img align='right' alt='' class='kmImage' src='".url()."/uploads/images/thumbs/".$imgName."' width='180' style='border:0;height:auto;line-height:100%;outline:none;text-decoration:none;padding-bottom:0;display:inline;vertical-align:bottom;margin-left:0;max-width:180px;' /></a>";
 }
     ?>
 
@@ -190,11 +211,9 @@ if($item->image != ""){
                                     echo "</span></p>";
                         }
                         ?>
-
-                        <p style="margin:0;padding-bottom:0">Quantity: {{ $cartcontent->qty }} &mdash; Total: {{number_format(($cartcontent->price * $cartcontent->qty),2,".",",")}}</p>
+                        <p style="margin:0;padding-bottom:0">Quantity: {{ $cartcontent->qty }} &mdash; Total: &#8358;{{number_format(($cartcontent->price * $cartcontent->qty),2,".",",")}}</p>
                     </td>
                 </tr>
-
                 @endforeach
                 </tbody>
             </table>

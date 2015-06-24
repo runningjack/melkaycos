@@ -30,7 +30,7 @@ require_once("inc/config.ui.php");
     </style>
 </head>
 <body id="page-top">
-@include('includes.header')
+@include('includes.header2')
 @yield('content')
 @include('includes.footer')
 <script src="<?php echo ASSETS_URL ?>/vendors/bxslider/jquery.bxslider.min.js"></script>

@@ -343,12 +343,19 @@ class HomeController extends BaseController {
                                      <span class='cart-item-title'>".$itemRow->name."</span>
                                     ";
                         $itemHtml .="<span class='cart-item-options'>";
-                        $itemHtml .=($itemRow->options->has('size') ? " - Size: ".$itemRow->options->size : '');
-                        $itemHtml .=($itemRow->options->has('buying') ? " - Buying Option: ".$itemRow->options->buying : '');
-                        $itemHtml .=($itemRow->options->has('volume') ? " - Volume: ".$itemRow->options->volume : '');
+                        $thml ="";
+                        if($itemRow->options){
+                            foreach($itemRow->options as $key=>$value){
+                                if($value != ""){
+                                    $thml .= " —".$value;
+                                }
+                            }
+                            $thml = preg_replace("/^ —/","",$thml);
+                        }
 
 
-                        $itemHtml .= "</span>";
+                        $itemHtml .= $thml."</span>";
+
                         $itemHtml .=  "
                                      <span class='cart-item-amount'>$itemRow->qty*<span>&#8358;".number_format($itemRow->price,2,'.',',')."</span>
                                  </div>
@@ -592,7 +599,7 @@ class HomeController extends BaseController {
 
         /*Add independent items to the item table*/
         if($order->save()){
-            $orderitems                     =   Cart::content();
+            $orderitems   =   Cart::content();
             foreach($orderitems as $orderitem){
 
                 /*
@@ -601,11 +608,6 @@ class HomeController extends BaseController {
                 *|$order item price changes to the carton or bulk purchase price
                 *|chosen
                 */
-                /*Todo To be reviewed cart should already manage price*/
-
-                if($orderitem->options->has('buying') && $orderitem->options->buying !=""){
-                    $orderitem->price  = DB::table('products_options')->where("product_option_value_id",$orderitem->optionid)->pluck('price');
-                }
 
 
                 /*
@@ -625,12 +627,16 @@ class HomeController extends BaseController {
                 */
                 /*Todo find betta way to do this with single object insert*/
 
-                if($orderitem->options && count($orderitem->option) > 0){
+                if($orderitem->options && count($orderitem->options) > 0){
                     foreach($orderitem->options as $key=>$value ){
-                        $productoption = Productoptions::where("product_id","=",$orderitem->id)->where("option_value","=",$value)->where("option_type","=",$key)->take(1)->get();
+
+
+                        $productoption = DB::table("products_options")->where("product_id","=",$orderitem->id)->where("option_value","=",$value)->get();
+                        if(count($productoption)>0 ){
                         DB::table("orders_options")->insert(
-                            ['order_id'=>$order->id,'product_option_id'=>$productoption->product_option_value_id,'option_value_id'=>$productoption->product_value_id,'name'=>$productoption->option_type,"value"=>$productoption->option_value]
+                            ['order_id'=>$order->id,'product_id'=>$orderitem->id,'product_option_id'=>$productoption[0]->product_option_value_id,'product_option_value_id'=>$productoption[0]->option_value_id,'name'=>$productoption[0]->option_type,"value"=>$productoption[0]->option_value]
                         );
+                        }
                     }
                 }
             }
