@@ -154,6 +154,8 @@ $page_css[] = "your_style.css";
                     jQuery(".cart .beta-select").on("click",function(){return jQuery(".cart-body").slideToggle(),!1});
                     var a=jQuery(".cart");jQuery(document).mouseup(function(b){a.is(b.target)||0!==a.has(b.target).length||jQuery(".cart-body").slideUp()})
                     //e.stopImmediatePropagation()
+
+                    scrollToElement('.cart');
                 })
                 request.fail(function(){
                     alert("Request failed: ")
@@ -218,6 +220,17 @@ $page_css[] = "your_style.css";
 
 
     });
+
+    function scrollToElement(selector, time, verticalOffset) {
+        time = typeof(time) != 'undefined' ? time : 1000;
+        verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+        element = $(selector);
+        offset = element.offset();
+        offsetTop = offset.top + verticalOffset;
+        $('html, body').animate({
+            scrollTop: offsetTop
+        }, time);
+    }
 </script>
 </body>
 </html>

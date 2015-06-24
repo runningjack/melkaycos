@@ -29,28 +29,29 @@
         <div class="grid_8">
             <h4 class="alt-title">send us mail:</h4>
 
-            <div id="errors-div">
-                @if (Session::has('error_message'))
-                <div class="alert alert-error">
-                    <strong>Error!</strong> {{ Session::get('error_message') }}
-                </div>
-                @endif
-                @if (Session::has('success_message'))
-                <div class="alert alert-success">
-                    <strong>Success!</strong> {{ Session::get('success_message') }}
-                </div>
-                @endif
-                @if( $errors->count() > 0 )
-                <div class="alert alert-error">
-                    <p>The following errors have occurred:</p>
-                    <ul id="form-errors">
-                        {{ $errors->first('email', '<li>:message</li>') }}
-                        {{ $errors->first('name', '<li>:message</li>') }}
-                    </ul>
-                </div>
-                @endif
+            @if(Session::has('error_message'))
+            <div class="alert alert-danger fade in">
+                <button class="close" data-dismiss="alert">×</button>
+                <i class="fa-fw fa fa-check"></i>{{Session::get('error_message')}}
+            </div>
+            @endif
+            @if(Session::has('success_message'))
+            <div class="alert alert-success fade in">
+                <button class="close" data-dismiss="alert">×</button>
+                <i class="fa-fw fa fa-check"></i>{{Session::get('success_message')}}
+            </div>
+            @endif
+
+            @if ( ! empty( $errors ) )
+            @foreach ( $errors->all() as $error )
+            <div class="alert alert-danger fade in">
+                <button class="close" data-dismiss="alert">×</button>
+                <i class="fa-fw fa fa-times"></i>{{$error}}
+
             </div>
 
+            @endforeach
+            @endif
             <!-- BEGIN CONTACT FORM -->
             {{ Form::open(array('url'=>'contact', 'id'=>'contact-form', 'class'=>'contact-form')) }}
             <div class="grid_5 alpha">
@@ -78,16 +79,6 @@
 
         </div>
 
-        @if ($post->p_content != '')
-        <div class="grid_4">
-            <div class="prefix_1_2">
-                <h4 class="alt-title">contacts:</h4>
-
-                {{ $post->p_content }}
-
-            </div>
-        </div>
-        @endif
 
     </div>
 

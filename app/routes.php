@@ -45,6 +45,9 @@ Route::get("success",array("as"=>"success","uses"=>"HomeController@getSuccess"))
 Route::post("register",array("as"=>"pregister","uses"=>"HomeController@postRegister"));
 
 
+Route::post("pages/contactus/{id?}",array("as"=>"cont","uses"=>"HomeController@postContact"));
+
+
 Route::group(array('prefix' => 'account'), function() {
 Route::get("/index",array("as"=>"account_home",'before' => 'auth',"uses"=>"Account\HomeController@getAccountIndex"));
 });

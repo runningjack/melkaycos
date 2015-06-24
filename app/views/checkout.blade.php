@@ -26,12 +26,12 @@ require_once ('inc/init.php');
 <div class="container">
     <div id="content">
         <div class="pull-left">
-            <p class="beta-checkout-help">Need help? Call customer services on 0800 123 4567.</p>
+            <p class="beta-checkout-help">Need help? Call customer services on 08033142237.</p>
         </div>
         <div class="pull-right menu-underline">
-            <a href="#">Email customer care</a>
-            <a href="#">Shipping information</a>
-            <a href="#">Returns &amp; exchange</a>
+            <a  href="mailto:info@melkaycosmetics.com">Email customer care</a>
+            <a href="<?php echo url()."pages/terms-and-conditions" ?>">Shipping information</a>
+            <a href="<?php echo url()."pages/terms-and-conditions" ?>">Returns &amp; exchange</a>
             <a href="#">F.A.Q.'s</a>
         </div>
         <div class="clearfix"></div>
@@ -378,9 +378,9 @@ require_once ('inc/init.php');
 
                                 <li class="payment_method_paypal">
                                     <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal">
-                                    <label for="payment_method_paypal">PayPal</label>
+                                    <label for="payment_method_paypal">Webpay (Interswitch)</label>
                                     <div class="payment_box payment_method_paypal" style="display: none;">
-                                        Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account
+                                        Pay using you credit card;
                                     </div>
                                 </li>
                             </ul>

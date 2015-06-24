@@ -663,6 +663,16 @@ class HomeController extends BaseController {
 
     }
 
+    public function getContact()
+    {
+        $contact = Post::where("type",'page')
+            ->where('permalink', 'contact')
+            ->first();
+        return  View::make('contactus')
+
+            ->with('contact', $contact);
+    }
+
     public function getPages($pagelink){
 
         $sliders  = \DB::table("posts")->where("type","slideshow")->where("status","published")->get();
@@ -748,6 +758,61 @@ class HomeController extends BaseController {
             }
         }
     }
+
+    public function postPages($pagelink){
+        $input = Input::all();
+
+       // if(Request::ajax()){
+            if($pagelink == "contact-us"){
+                $input = Input::all();
+                // print_r($input);
+                $rules = array(
+                    'email' => 'required|min:5|email',
+                    'name' => 'required',
+                    'message_text' => 'required',
+                );
+
+                try {
+                    $validator = Validator::make(Input::all(), $rules);
+
+
+                    if($validator->passes()){
+
+                        Mail::send('emails.contactus', $input, function($message) use($input) {
+                            $message->from($input['email'], "Melkaycosmetics.com Contact Page ". $input['name']);
+                            $message->to("melkamson@yahoo.co.uk", "Melkay Cosmtics")->cc('amedora09@gmail.com')
+                                ->subject($input['subject']);
+                        });
+
+                        Session::put("success_message","Thank you for contacting us! ");
+                        return Redirect::back();
+
+                    }else{
+
+                        return Redirect::back()->withErrors($validator)->withInput();
+                    }
+                    //
+
+                } catch (Exception $e) {
+                    return Redirect::back()
+                        ->withInput()
+                        ->with('error_message', $e->getMessage());
+                } catch(ValidationException $e) {
+                    return Redirect::back()
+                        ->withInput()
+                        ->with('error_message', $e->getMessage());
+                }catch(Swift_RfcComplianceException $e){
+                    return Redirect::back()
+                        ->withInput()
+                        ->with('error_message', $e->getMessage());
+                }
+
+
+            }
+
+       // }
+    }
+
 
 
     public function postProduct($id=""){

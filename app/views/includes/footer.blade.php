@@ -32,11 +32,11 @@
                     <div>
                         <ul>
                             <li><a href="#"><i class="fa fa-chevron-right"></i> Home</a></li>
-                            <li><a href="#"><i class="fa fa-chevron-right"></i> About Melkay Cosmetics</a></li>
-                            <li><a href="#"><i class="fa fa-chevron-right"></i> Delivery Information </a></li>
-                            <li><a href="#"><i class="fa fa-chevron-right"></i> Privacy Policy</a></li>
-                            <li><a href="#"><i class="fa fa-chevron-right"></i> Terms &amp; Conditions</a></li>
-                            <li><a href="#"><i class="fa fa-chevron-right"></i> Our Contact</a></li>
+                            <li><a href="<?php echo url()."/pages/about-us" ?>" target="_blank"><i class="fa fa-chevron-right"></i> About Melkay Cosmetics</a></li>
+                            <li><a href="#" target="_blank"><i class="fa fa-chevron-right"></i> Delivery Information </a></li>
+                            <li><a href="<?php echo url()."/pages/privacy-policy" ?>" target="_blank"><i class="fa fa-chevron-right"></i> Privacy Policy</a></li>
+                            <li><a href="<?php echo url()."/pages/terms-and-conditions" ?>" target="_blank"><i class="fa fa-chevron-right"></i> Terms &amp; Conditions</a></li>
+                            <li><a href="<?php echo url()."/pages/contact" ?>" target="_blank"><i class="fa fa-chevron-right"></i> Our Contact</a></li>
                         </ul>
                     </div>
                 </div>
