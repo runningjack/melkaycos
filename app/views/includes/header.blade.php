@@ -5,6 +5,7 @@
  * Date: 1/22/15
  * Time: 1:40 PM
  */
+
 ?>
 <div id="header">
 <div class="header-top">
@@ -87,13 +88,20 @@ $total = Cart::total();
                                  <div class='media-body'>
                                      <span class='cart-item-title'>".$itemRow->name."</span>
                                      ";
+
                                      $itemHtml .="<span class='cart-item-options'>";
-                                     $itemHtml .=($itemRow->options->has('size') ? " - Size: ".$itemRow->options->size : '');
-                                     $itemHtml .=($itemRow->options->has('buying') ? " - Buying Option: ".$itemRow->options->buying : '');
-                                     $itemHtml .=($itemRow->options->has('volume') ? " - Volume: ".$itemRow->options->volume : '');
+                                     $thml ="";
+                                     if($itemRow->options){
+                                         foreach($itemRow->options as $key=>$value){
+                                             if($value != ""){
+                                                 $thml .= " —".$value;
+                                             }
+                                         }
+                                         $thml = preg_replace("/^ —/","",$thml);
+                                     }
 
 
-                                     $itemHtml .= "</span>";
+                                     $itemHtml .= $thml."</span>";
                                      $itemHtml .=  "
                                      <span class='cart-item-amount'>$itemRow->qty*<span>&#8358;".number_format($itemRow->price,2,'.',',')."</span>
                                  </div>

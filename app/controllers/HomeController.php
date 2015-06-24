@@ -235,7 +235,7 @@ class HomeController extends BaseController {
                 $item = Product::find($_POST['pid']);
                 Cart::update($_POST['rowid'],array( 'qty' => $_POST['qty'], ));
                 $content = Cart::content();
-                Session::put("cartItems",$content);
+
                 $total = Cart::total();
 
                 $itemHtml ="";
@@ -268,10 +268,13 @@ class HomeController extends BaseController {
                                      <span class='cart-item-title'>".$itemRow->name."</span>
                                      ";
                         $itemHtml .="<span class='cart-item-options'>";
-                        $itemHtml .=($itemRow->options->has('size') ? " - Size: ".$itemRow->options->size : '');
-                        $itemHtml .=($itemRow->options->has('buying') ? " - Buying Option: ".$itemRow->options->buying : '');
-                        $itemHtml .=($itemRow->options->has('volume') ? " - Volume: ".$itemRow->options->volume : '');
-
+                        if($itemRow->options){
+                            foreach($itemRow->options as $key=>$value){
+                                if($value != ""){
+                                    $itemHtml .=$value."&mdash";
+                                }
+                            }
+                        }
 
                         $itemHtml .= "</span>";
                         $itemHtml .=  "
@@ -301,8 +304,6 @@ class HomeController extends BaseController {
                 /*$itemHtml .= "</div>";*/
                 echo $itemHtml;
             }
-
-
 
             if(isset($_POST['delid'])){
                 //$item = Product::find($_POST['delid']);
@@ -342,12 +343,19 @@ class HomeController extends BaseController {
                                      <span class='cart-item-title'>".$itemRow->name."</span>
                                     ";
                         $itemHtml .="<span class='cart-item-options'>";
-                        $itemHtml .=($itemRow->options->has('size') ? " - Size: ".$itemRow->options->size : '');
-                        $itemHtml .=($itemRow->options->has('buying') ? " - Buying Option: ".$itemRow->options->buying : '');
-                        $itemHtml .=($itemRow->options->has('volume') ? " - Volume: ".$itemRow->options->volume : '');
+                        $thml ="";
+                        if($itemRow->options){
+                            foreach($itemRow->options as $key=>$value){
+                                if($value != ""){
+                                    $thml .= " —".$value;
+                                }
+                            }
+                            $thml = preg_replace("/^ —/","",$thml);
+                        }
 
 
-                        $itemHtml .= "</span>";
+                        $itemHtml .= $thml."</span>";
+
                         $itemHtml .=  "
                                      <span class='cart-item-amount'>$itemRow->qty*<span>&#8358;".number_format($itemRow->price,2,'.',',')."</span>
                                  </div>
@@ -377,7 +385,6 @@ class HomeController extends BaseController {
                 echo $itemHtml;
             }
 
-
             //return ($itemHtml);
 
             //exit;
@@ -397,7 +404,6 @@ class HomeController extends BaseController {
         $invoice_no = Order::invoiceNo($lastid);
         $input['invoice_no'] = $invoice_no;
         if (Auth::account()->check()) {
-
 
             $order = new Order();
             $user  = Auth::account()->get();
@@ -449,59 +455,10 @@ class HomeController extends BaseController {
             $order->sub_total               =   Cart::total();
             /*Add independent items to the item table*/
             $input['email'] = $user->email;
+            /**
+             * Took away order->save
+             */
 
-            if($order->save()){
-                $orderitems                     =   Cart::content();
-                foreach($orderitems as $orderitem){
-
-                    /*
-                     *|This section check for if product has a whole sale buying
-                     *|option i.e. if there is bulk purchase on carton or in Dozen
-                     *|$order item price changes to the carton or bulk purchase price
-                     *|chosen
-                     */
-                    /*Todo To be reviewed cart should already manage price*/
-                    if($orderitem->options->has('buying') && $orderitem->options->buying !=""){
-                        $orderitem->price  = DB::table('products_options')->where("product_option_value_id",$orderitem->optionid)->pluck('price');
-                    }
-
-                    $total = $orderitem->qty * $orderitem->price;
-                    /*
-                    *|insert purchased item(s) in to the orders_products
-                    *|table
-                    */
-                    /*Todo find betta way to do this with single object insert*/
-                    DB::table('orders_products')->insert(
-                        ['product_id' => $orderitem->id, 'order_id' => $order->id, 'product_name'=>$orderitem->name,
-                            'price'=>$orderitem->price, 'quantity'=>$orderitem->qty,'total'=>$total]
-                    );
-                    /*
-                    *|insert into order_option table to store
-                    *|product option selected by customers
-                    */
-                    /*Todo find betta way to do this with single object insert*/
-                    if($orderitem->options && $orderitem->options->optionid !=""){
-
-                        $productoption = Productoptions::where("product_id","=",$orderitem->id)->where("product_option_value_id","=",$orderitem->options->optionid);
-                        DB::table("orders_options")->insert(
-                            ['order_id'=>$order->id,'product_option_id'=>$productoption->product_option_value_id,'option_value_id'=>$productoption->product_option_value_id,'name'=>$productoption->option_type,"value"=>$productoption->option_value]
-                        );
-                    }
-                }
-
-                $input['order_message'] = "";
-                $input['order_footnote']="";
-                $input['order_id']= $order->id;
-                /* TODO Section to load options on products */
-
-                /* TODO Send order info to customer as an invoice or notification */
-                Mail::send('emails.orderconfirmation', $input, function($message) use($input) {
-                    $message->from("order@melkaycosmetics.com", "Melkay Cosmetics ");
-                    $message->to($input['email'], "order@melkaycosmetics.com")->cc('ahmed@chroniclesoft.com')->subject("Order Confirmation: ". $input['invoice_no']);
-                });
-            }
-            return Redirect::route("success")
-                ->with("order",Order::find($order->id));
 
 
         }else{
@@ -525,8 +482,6 @@ class HomeController extends BaseController {
                     $customer->apartment               =   $input['apartment'];
                     $customer->city                    =   $input['city'];
                     $customer->country                 =   $input['country'];
-
-
 
                     $customer->password     =  Hash::make(Input::get("password"));
                     if($customer->save()){
@@ -579,59 +534,9 @@ class HomeController extends BaseController {
                         $order->total                   =   Cart::total();
                         $order->sub_total               =   Cart::total();
 
-                        if($order->save()){
-                            $orderitems                     =   Cart::content();
-                            foreach($orderitems as $orderitem){
-                                /*
-                                *|This section check for if product has a whole sale buying
-                                *|option i.e. if there is bulk purchase on carton or in Dozen
-                                *|$order item price changes to the carton or bulk purchase price
-                                *|chosen
-                                */
-                                /*Todo To be reviewed cart should already manage price*/
-                                if($orderitem->options->has('buying') && $orderitem->options->buying !=""){
-                                    $orderitem->price  = DB::table('products_options')->where("product_option_value_id",$orderitem->optionid)->pluck('price');
-                                }
-                                $total = $orderitem->qty * $orderitem->price;
-
-                                /*
-                                *|insert purchased item(s) in to the orders_products
-                                *|table
-                                */
-                                /*Todo find betta way to do this with single object insert*/
-                                \DB::table('orders_products')->insert(
-                                    ['product_id' => $orderitem->id, 'order_id' => $order->id, 'product_name'=>$orderitem->name,
-                                        'price'=>$orderitem->price, 'quantity'=>$orderitem->qty,'total'=>$total]
-                                );
-
-                                /*
-                                *|insert into order_option table to store
-                                *|product option selected by customers
-                                */
-                                /*Todo find betta way to do this with single object insert*/
-
-                                if($orderitem->options && $orderitem->options->optionid !=""){
-
-                                    $productoption = \Productoptions::where("product_id","=",$orderitem->id)->where("product_option_value_id","=",$orderitem->options->optionid);
-                                    \DB::table("orders_options")->insert(
-                                        ['order_id'=>$order->id,'product_option_id'=>$productoption->product_option_value_id,'option_value_id'=>$productoption->product_option_value_id,'name'=>$productoption->option_type,"value"=>$productoption->option_value]
-                                    );
-                                }
-                            }
-                            /* TODO Section to load options on products*/
-
-                            /*return View::make("success")->with("categories",DB::table("categories")->get())
-                                ->with("order",Order::find($order->id));*/
-                            $input['order_message'] = "";
-                            $input['order_footnote']="";
-                            $input['order_id']= $order->id;
-                            Mail::send('emails.orderconfirmation', $input, function($message) use($input) {
-                                $message->from("order@melkaycosmetics.com", "Melkay Cosmetics ");
-                                $message->to($input['email'], "order@melkaycosmetics.com")->cc('ahmed@chroniclesoft.com')->subject("Order Confirmation: ". $input['invoice_no']);
-                            });
-                        }
-                        return Redirect::route("success")
-                            ->with("order",Order::find($order->id));
+                        /**
+                        took away order->save for new customer
+                         */
                     }
                 }
             }else{ //Section to be executed if customer does not want to register an account
@@ -660,7 +565,14 @@ class HomeController extends BaseController {
                     $order->shipping_city           =   $input['city'];
                     $order->shipping_country        =   $input['country'];
                 }else{
-
+                    $order->shipping_firstname      =   $input['shipping_firstname'];
+                    $order->shipping_lastname       =   $input['shipping_lastname'];
+                    $order->shipping_company        =   $input['shipping_company'];
+                    $order->shipping_address_1      =   $input['shipping_apartment'];
+                    $order->shipping_address_2      =   $input['shipping_address'];
+                    $order->shipping_city           =   $input['shipping_city'];
+                    $order->shipping_state          =   $input['shipping_state'];
+                    $order->shipping_country        =   $input['shipping_country'];
                 }
                 $order->payment_firstname       =   $input['firstname'];
                 $order->payment_lastname        =   $input['lastname'];
@@ -676,71 +588,79 @@ class HomeController extends BaseController {
                 $order->notes                   =   $input['notes'];
                 $order->total                   =   Cart::total();
                 $order->sub_total               =   Cart::total();
-                /*Add independent items to the item table*/
-                if($order->save()){
-                    $orderitems                     =   Cart::content();
-                    foreach($orderitems as $orderitem){
-
-                        /*
-                        *|This section check for if product has a whole sale buying
-                        *|option i.e. if there is bulk purchase on carton or in Dozen
-                        *|$order item price changes to the carton or bulk purchase price
-                        *|chosen
-                        */
-                        /*Todo To be reviewed cart should already manage price*/
-
-                        if($orderitem->options->has('buying') && $orderitem->options->buying !=""){
-                            $orderitem->price  = DB::table('products_options')->where("product_option_value_id",$orderitem->optionid)->pluck('price');
-                        }
-
-
-                        /*
-                        *|insert purchased item(s) in to the orders_products
-                        *|table
-                        */
-                        /*Todo find betta way to do this with single object insert*/
-                        $total = $orderitem->qty * $orderitem->price;
-
-                        \DB::table('orders_products')->insert(
-                            ['product_id' => $orderitem->id, 'order_id' => $order->id, 'product_name'=>$orderitem->name,
-                                'price'=>$orderitem->price, 'quantity'=>$orderitem->qty,'total'=>$total]
-                        );
-                        /*
-                        *|insert into order_option table to store
-                        *|product option selected by customers
-                        */
-                        /*Todo find betta way to do this with single object insert*/
-
-                        if($orderitem->options && $orderitem->options->optionid !=""){
-
-                            $productoption = \Productoptions::where("product_id","=",$orderitem->id)->where("product_option_value_id","=",$orderitem->options->optionid)->first();
-                            \DB::table("orders_options")->insert(
-                                ['order_id'=>$order->id,'product_option_id'=>$productoption->product_option_value_id,'option_value_id'=>$productoption->option_value_id,'name'=>$productoption->option_type,"value"=>$productoption->option_value]
-                            );
-                        }
-                    }
-
-                    /* TODO Section to load options on products*/
-
-                    /*Send order info to customer as an invoice or notification*/
-                    $input['order_message'] = "";
-                    $input['order_footnote']="";
-                    $input['order_id']= $order->id;
-
-                    Mail::send('emails.orderconfirmation', $input, function($message) use($input) {
-                        $message->from("orders@melkaycosmetics.com", "Melkay Cosmetics ");
-                        $message->to($input['email'], "order@melkaycosmetics.com")->cc('ahmed@chroniclesoft.com')->subject("Order Confirmation: ". $input['invoice_no']);
-                    });
-
-                }
-
-                /*return View::make("success")->with("categories",DB::table("categories")->get())
-                    ->with("order",Order::find($order->id));*/
-                return Redirect::route("success")
-                    ->with("order",Order::find($order->id));
+               /**
+               Took away order->save on non- registering customer
+                */
 
             }
         }
+
+        //save order and perform other functionality
+
+        /*Add independent items to the item table*/
+        if($order->save()){
+            $orderitems   =   Cart::content();
+            foreach($orderitems as $orderitem){
+
+                /*
+                *|This section check for if product has a whole sale buying
+                *|option i.e. if there is bulk purchase on carton or in Dozen
+                *|$order item price changes to the carton or bulk purchase price
+                *|chosen
+                */
+
+
+                /*
+                *|insert purchased item(s) in to the orders_products
+                *|table
+                */
+                /*Todo find betta way to do this with single object insert*/
+                $total = $orderitem->qty * $orderitem->price;
+
+                \DB::table('orders_products')->insert(
+                    ['product_id' => $orderitem->id, 'order_id' => $order->id, 'product_name'=>$orderitem->name,
+                        'price'=>$orderitem->price, 'quantity'=>$orderitem->qty,'total'=>$total]
+                );
+                /*
+                *|insert into order_option table to store
+                *|product option selected by customers
+                */
+                /*Todo find betta way to do this with single object insert*/
+
+                if($orderitem->options && count($orderitem->options) > 0){
+                    foreach($orderitem->options as $key=>$value ){
+
+
+                        $productoption = DB::table("products_options")->where("product_id","=",$orderitem->id)->where("option_value","=",$value)->get();
+                        if(count($productoption)>0 ){
+                        DB::table("orders_options")->insert(
+                            ['order_id'=>$order->id,'product_id'=>$orderitem->id,'product_option_id'=>$productoption[0]->product_option_value_id,'product_option_value_id'=>$productoption[0]->option_value_id,'name'=>$productoption[0]->option_type,"value"=>$productoption[0]->option_value]
+                        );
+                        }
+                    }
+                }
+            }
+
+            /* TODO Section to load options on products*/
+
+            /*Send order info to customer as an invoice or notification*/
+            $input['order_message'] = "";
+            $input['order_footnote']="";
+            $input['order_id']= $order->id;
+
+            Mail::send('emails.orderconfirmation', $input, function($message) use($input) {
+                $message->from("orders@melkaycosmetics.com", "Melkay Cosmetics ");
+                $message->to($input['email'], "order@melkaycosmetics.com")->cc('ahmed@chroniclesoft.com')->subject("Order Confirmation: ". $input['invoice_no']);
+            });
+
+        }
+
+        /*return View::make("success")->with("categories",DB::table("categories")->get())
+            ->with("order",Order::find($order->id));*/
+        return Redirect::route("success")
+            ->with("order",Order::find($order->id));
+
+
     }
 
     public function getPages($pagelink){
@@ -815,7 +735,7 @@ class HomeController extends BaseController {
             $customer->password     =  Hash::make(Input::get("password"));
             if($customer->save()){
 
-                Mail::send('emails.orderconfirmation', $input, function($message) use($input) {
+                Mail::send('emails.register', $input, function($message) use($input) {
                     $message->from("info@melkaycosmetics.com", "Melkay Cosmetics ");
                     $message->to($input['email'], "info@melkaycosmetics.com")->cc('ahmed@chroniclesoft.com')->subject("Registration ");
                 });
@@ -842,16 +762,14 @@ class HomeController extends BaseController {
 
         if(isset($_POST['pid'])){
         $item = Product::find((int)$_POST['pid']);
-        $optionprice =0;
-                if(isset($_POST['buying']) && !empty($_POST['buying'])){
-                    $optionprice = $name = DB::table('products_options')->where('product_id', (int)$_POST['pid'])->where("option_value",$_POST['buying'])->pluck('price');
 
-                }else{
-                    $optionprice = $item->price;
+                if(isset($_POST['buying']) && $_POST['buying'] !=""){
+                    $item->price =  DB::table('products_options')->where('product_id', (int)$_POST['pid'])->where("option_value",$_POST['buying'])->pluck('price');
+
                 }
 
 
-                Cart::add(array('id' => $item->id, 'name' => $item->title, 'qty' => Input::get("qty"), 'price' => $optionprice,'options'=>array("size"=>Input::get("size"),"buying"=>Input::get("buying"),"volume"=>Input::get("volume"))));
+                Cart::add(array('id' => $item->id, 'name' => $item->title, 'qty' => Input::get("qty"), 'price' => $item->price,'options'=>array("size"=>Input::get("size"),"buying"=>Input::get("buying"),"volume"=>Input::get("volume"))));
                 $content = Cart::content();
 
                 $total = Cart::total();
@@ -884,13 +802,20 @@ class HomeController extends BaseController {
                                  <div class='media-body'>
                                      <span class='cart-item-title'>".$itemRow->name."</span>";
                         $itemHtml .="<span class='cart-item-options'>";
-                        $itemHtml .=($itemRow->options->has('size') ? " - Size: ".$itemRow->options->size : '');
-                        $itemHtml .=($itemRow->options->has('buying') ? " - Buying Option: ".$itemRow->options->buying : '');
-                        $itemHtml .=($itemRow->options->has('volume') ? " - Volume: ".$itemRow->options->volume : '');
+                        $thml ="";
+                        if($itemRow->options){
+                            foreach($itemRow->options as $key=>$value){
+                                if($value != ""){
+                                    $thml .= " —".$value;
+                                }
+                            }
+                            $thml = preg_replace("/^ —/","",$thml);
+                        }
 
 
-                        $itemHtml .= "</span>
-                                     <span class='cart-item-amount'>$itemRow->qty*<span>&#8358;".number_format($itemRow->price,2,'.',',')."</span>
+                        $itemHtml .= $thml."</span>";
+
+                        $itemHtml .=  "<span class='cart-item-amount'>$itemRow->qty*<span>&#8358;".number_format($itemRow->price,2,'.',',')."</span>
                                  </div>
                              </div>
                          </div>

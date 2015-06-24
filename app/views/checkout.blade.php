@@ -189,12 +189,12 @@ require_once ('inc/init.php');
 
                         <div class="form-block">
                             <label for="shipping_firstname">First name*</label>
-                            <input type="text" id="shipping_firstname" name="shipping_firstname" required placeholder="first name">
+                            <input type="text" id="shipping_firstname" name="shipping_firstname"  placeholder="first name">
                         </div>
 
                         <div class="form-block">
                             <label for="shiping_lastname">Last name*</label>
-                            <input type="text" id="shiping_lastname" name="shipping_lastname" required placeholder="last name">
+                            <input type="text" id="shiping_lastname" name="shipping_lastname"  placeholder="last name">
                         </div>
 
                         <div class="form-block">
@@ -204,13 +204,13 @@ require_once ('inc/init.php');
 
                         <div class="form-block">
                             <label for="shipping_address">Address*</label>
-                            <input type="text" id="shipping_address" name="shipping_address" placeholder="Street Address" required>
-                            <input type="text" id="shipping_apartment" name="shippin_apartment" placeholder="Apartment, suite, unit etc." required>
+                            <input type="text" id="shipping_address" name="shipping_address" placeholder="Street Address" >
+                            <input type="text" id="shipping_apartment" name="shipping_apartment" placeholder="Apartment, suite, unit etc." >
                         </div>
 
                         <div class="form-block">
                             <label for="shipping_city">Town / City*</label>
-                            <input type="text" id="shipping_city" name="shipping_city" required placeholder="Town / City*">
+                            <input type="text" id="shipping_city" name="shipping_city"  placeholder="Town / City*">
                         </div>
 
                         <div class="form-block">
@@ -220,12 +220,12 @@ require_once ('inc/init.php');
 
                         <div class="form-block">
                             <label for="shipping_email">Email address*</label>
-                            <input type="email" id="shipping_email" name="shipping_email" required placeholder="email">
+                            <input type="email" id="shipping_email" name="shipping_email"  placeholder="email">
                         </div>
 
                        <!-- <div class="form-block">
                             <label for="phone">Phone*</label>
-                            <input type="text" id="phone" name="phone" placeholder="phone" required>
+                            <input type="text" id="phone" name="phone" placeholder="phone" >
                         </div>-->
 
                     </div>
@@ -269,10 +269,25 @@ require_once ('inc/init.php');
                                     <div class='media'>
                                         <img src='".ASSETS_URL.'/uploads/images/thumbs/'.$imgName."' alt='' class='pull-left'>
                                         <div class='media-body'>
-                                            <p class='font-large'>$product->title</p>
-                                            <!--<span class='color-gray your-order-info'>Color: Red</span>
-                                            <span class='color-gray your-order-info'>Size: M</span>-->
-                                            <span class='color-gray your-order-info'>Qty: $itemRow->qty</span>
+                                            <p class='font-large'>$product->title</p>";
+                                        if($itemRow->options){
+                                            echo " <span class='pink'>";
+                                            $thml ="";
+                                            $z=0;
+                                            foreach($itemRow->options as $key=>$value){
+
+                                                if($value !=""){
+
+                                                    $thml .= " —".$value;
+
+                                                }
+                                            }
+                                            $thml = preg_replace("/^ —/","",$thml);
+                                            echo $thml;
+                                            echo "</span>";
+
+                                        }
+                                            echo "<span class='color-gray your-order-info'>Qty: $itemRow->qty</span>
                                         </div>
                                     </div>
                                 </div>
@@ -309,31 +324,31 @@ require_once ('inc/init.php');
                         <div class="your-order-head"><h5>Shipping Method</h5></div>
 
                         <div class="your-order-body">
-                            <ul class="payment_methods methods">
-                                <li class="payment_method_bacs">
-                                    <input id="payment_method_bacs" type="radio" class="input-radio" name="shipping_method" value="standard" checked="checked" data-order_button_text="">
-                                    <label for="payment_method_bacs">Standard Shipping</label>
-                                    <div class="payment_box payment_method_bacs" style="display: block;">
+                            <ul class="shipping_methods methods">
+                                <li class="shipping_method_standard">
+                                    <input id="shipping_method_standard" type="radio" class="input-radio" name="shipping_method" value="standard" checked="checked" data-order_button_text="">
+                                    <label for="shipping_method_standard">Standard Shipping</label>
+                                    <div class="shipping_box shipping_method_standard" style="display: block;">
                                         Your order will be delivered at the Shipping Address you supplied.<br>
                                         <strong>Shipping Time:</strong> 1 - 6 days
                                         Free
                                     </div>
                                 </li>
 
-                                <li class="payment_method_cheque">
-                                    <input id="payment_method_cheque" type="radio" class="input-radio" name="shipping_method" value="express" data-order_button_text="">
-                                    <label for="payment_method_cheque">Express Shipping </label>
-                                    <div class="payment_box payment_method_cheque" style="display: none;">
+                                <li class="shipping_method_express">
+                                    <input id="shipping_method_express" type="radio" class="input-radio" name="shipping_method" value="express" data-order_button_text="">
+                                    <label for="shipping_method_express">Express Shipping </label>
+                                    <div class="shipping_box shipping_method_express" style="display: none;">
                                         Your order will be delivered at the Shipping Address you supplied.<br>
                                         <strong>Shipping Time:</strong> 1
 
                                     </div>
                                 </li>
 
-                                <li class="payment_method_paypal">
-                                    <input id="payment_method_paypal" type="radio" class="input-radio" name="shipping_method" value="pickup" data-order_button_text="">
-                                    <label for="payment_method_paypal">Pickup Station</label>
-                                    <div class="payment_box payment_method_paypal" style="display: none;">
+                                <li class="shipping_method_pickup">
+                                    <input id="shipping_method_pickup" type="radio" class="input-radio" name="shipping_method" value="pickup" data-order_button_text="">
+                                    <label for="shipping_method_pickup">Pickup Station</label>
+                                    <div class="shipping_box shipping_method_pickup" style="display: none;">
                                         Selecting this indicate that
                                     </div>
                                 </li>
