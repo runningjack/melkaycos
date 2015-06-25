@@ -42,7 +42,7 @@ class HomeController extends BaseController {
             //
             ->get();
         $newproducts =DB::table('products')
-            ->orderBy('created_at', 'desc')->take(3)->get();
+            ->orderBy('created_at', 'desc')->take(6)->get();
         $specialproducts =DB::table('products')->where("tag","special")
             ->orderBy('created_at', 'desc')->take(3)->get();
         return View::make('pages.home')->with("page_title","Welcome")

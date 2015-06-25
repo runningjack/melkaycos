@@ -175,41 +175,45 @@ require_once("inc/init.php");
 <div class="beta-products-list">
     <h4>New Products</h4>
     <div class="space50">&nbsp;</div>
+
+    @if($newproducts)
+    {{--*/$x=1/*--}}
+    @foreach($newproducts as $latest)
+    @if( $x==1 || $x%3 ==1  )
+    <div class="space50">&nbsp;</div>
     <div class="row">
-        @if($newproducts)
-        @foreach($newproducts as $latest)
+        @endif
+
+        @if($x <= 6)
         <div class="col-sm-4 wow fadeInDown">
             <div class="single-item">
-                <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
                 <div class="single-item-header">
 
+                    <?php
+                    if($latest->image != ""){
+                        if(public_path()){
+                            $source_folder = public_path().'/uploads/images/';
+                            $destination_folder = public_path(). '/uploads/images/';
+                            $image_info = pathinfo(public_path().'/uploads/images/'.$latest->image);
+                        }else{
+                            $source_folder = '/home/melkaycos/public_html/uploads/images/';
+                            $destination_folder = '/home/melkaycos/public_html/uploads/images/';
+                            $image_info = pathinfo('/home/melkaycos/public_html/uploads/images/'.$latest->image);
+                        }
 
-<?php
-if($latest->image != ""){
-                    if(public_path()){
-                    $source_folder = public_path().'/uploads/images/';
-                    $destination_folder = public_path(). '/uploads/images/';
-                    $image_info = pathinfo(public_path().'/uploads/images/'.$latest->image);
-                    }else{
-                    $source_folder = '/home/melkaycos/public_html/uploads/images/';
-                    $destination_folder = '/home/melkaycos/public_html/uploads/images/';
-                    $image_info = pathinfo('/home/melkaycos/public_html/uploads/images/'.$latest->image);
-                    }
+                        $image_extension = strtolower($image_info["extension"]); //image extension
+                        $image_name_only = strtolower($image_info["filename"]);//file name only, no extension
 
-                    $image_extension = strtolower($image_info["extension"]); //image extension
-                    $image_name_only = strtolower($image_info["filename"]);//file name only, no extension
-
-                    $img2 = \Image::make($source_folder.$latest->image);
-                    $img2->resize(262,311);
-                    $imgName = $image_name_only."-262x311".".".$image_extension;
-                    $img2->save($destination_folder."thumbs/".$imgName);
+                        $img2 = \Image::make($source_folder.$latest->image);
+                        $img2->resize(262,311);
+                        $imgName = $image_name_only."-262x311".".".$image_extension;
+                        $img2->save($destination_folder."thumbs/".$imgName);
 
 
-                    echo "<a href='".url()."/product/details/".$latest->id."'>
+                        echo "<a href='".url()."/product/details/".$latest->id."'>
                     <img src='".url()."/uploads/images/thumbs/".$imgName."' style='width:262px !important; height:311px !important'></a>";
-}
-?>
-
+                    }
+                    ?>
                 </div>
                 <div class="single-item-body">
                     <p class="single-item-title">{{$latest->title}}</p>
@@ -218,17 +222,21 @@ if($latest->image != ""){
                     </p>
                 </div>
                 <div class="single-item-caption">
-                   <!-- <a class="add-to-cart pull-left" href="javascript:void(0)" pid="{{$latest->id}}"><i class="fa fa-shopping-cart"></i></a>-->
+                    <!--<a class="add-to-cart pull-left" href="javascript:void(0)" pid="{{$latest->id}}"><i class="fa fa-shopping-cart"></i></a>-->
                     <a class="beta-btn primary" href="{{ASSETS_URL}}/product/details/{{$latest->id}}">Details <i class="fa fa-chevron-right"></i></a>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-        @endforeach
         @endif
-
-
+        @if($x%3 ==0 )
     </div>
+    @endif
+    {{--*/$x++/*--}}
+    @endforeach
+    @endif
+
+    
 
 </div>
 
