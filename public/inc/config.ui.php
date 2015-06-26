@@ -11,17 +11,17 @@ $breadcrumbs = array(
 ex:
 "dashboard" => array(
 	"title" => "Display Title",
-	"url" => "http://yoururl.com",
+	"url" => "http:/yoururl.com",
 	"url_target" => "_self",
 	"icon" => "fa-home",
 	"label_htm" => "<span>Add your custom label/badge html here</span>",
-	"sub" => array() //contains array of sub items with the same format as the parent
+	"sub" => array() /contains array of sub items with the same format as the parent
 )
 */
 $page_nav = array(
 	"dashboard" => array(
 		"title" => "Dashboard",
-		"url" => '/melkay/public/backend/dashboard/index',
+		"url" => '/melkaycosmetics/melkaycos/public/backend/dashboard/index',
 		"icon" => "fa-home"
 	),
 	"pages" => array(
@@ -30,11 +30,11 @@ $page_nav = array(
 		"sub" => array(
 			"list" => array(
 				"title" => "All Pages",
-				"url" => '/melkay/public/backend/pages/index'
+				"url" => '/melkaycosmetics/melkaycos/public/backend/pages/index'
 			),
 			"addnew" => array(
 				"title" => "Add New",
-				"url" => '/melkay/public/backend/pages/addnew'
+				"url" => '/melkaycosmetics/melkaycos/public/backend/pages/addnew'
 			)
 		)
 	),
@@ -44,16 +44,16 @@ $page_nav = array(
 		"sub" => array(
 			"list" => array(
 				"title" => "All Post",
-				"url" => '/melkay/public/backend/posts/index',
+				"url" => '/melkaycosmetics/melkaycos/public/backend/posts/index',
 
 			),
 			"addnew" => array(
 				"title" => "Add New",
-				"url" => '/melkay/public/backend/posts/addnew'
+				"url" => '/melkaycosmetics/melkaycos/public/backend/posts/addnew'
 			),
             "categories" => array(
                 "title" => "All Categories",
-                "url" => "/melkay/public/backend/categories/index"
+                "url" => "/melkaycosmetics/melkaycos/public/backend/categories/index"
             )
 		)
 	),
@@ -68,12 +68,12 @@ $page_nav = array(
                     "list"=>array(
                         "title"=>"Category Listing",
                         "icon"=>"fa-list-ol",
-                        "url"=>"/melkay/public/backend/pcategory/index",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/pcategory/index",
                     ),
                     "addnew"=>array(
                         "title"=>"Add New",
                         "icon"=>"fa-plus",
-                        "url"=>"/melkay/public/backend/pcategory/addnew"
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/pcategory/addnew"
                     )
                 )
             ),
@@ -84,12 +84,12 @@ $page_nav = array(
                     "list"=>array(
                         "title"=>"Product Listing",
                         "icon"=>"fa-list-ol",
-                        "url"=>"/melkay/public/backend/products/index",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/products/index",
                     ),
                     "addnew"=>array(
                         "title"=>"Add New",
                         "icon"=>"fa-plus",
-                        "url"=>"/melkay/public/backend/products/addnew"
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/products/addnew"
                     )
                 )
             ),
@@ -100,12 +100,12 @@ $page_nav = array(
                     "list"=>array(
                         "title"=>"Brand Listing",
                         "icon"=>"fa-list-ol",
-                        "url"=>"/melkay/public/backend/brands/index",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/brands/index",
                     ),
                     "addnew"=>array(
                         "title"=>"Add New",
                         "icon"=>"fa-plus",
-                        "url"=>"/melkay/public/backend/brands/addnew"
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/brands/addnew"
                     )
                 )
             ),
@@ -116,16 +116,70 @@ $page_nav = array(
                     "list"=>array(
                         "title"=>"Option Listing",
                         "icon"=>"fa-list-ol",
-                        "url"=>"/melkay/public/backend/options/index"
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/options/index"
                     ),
                     "addnew"=>array(
                         "title"=>"Add New",
                         "icon"=>"fa-plus",
-                        "url"=>"/melkay/public/backend/options/addnew"
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/options/addnew"
                     )
                 )
             )
         )
+    ),
+    "sales"=>array(
+        "title"=>"Sales",
+        "icon"=>"fa-money",
+        "sub"=>array(
+            "orders"=>array(
+                "title"=>"Orders",
+                "icon"=>"fa-shopping-cart",
+                "sub"=>array(
+                    "list"=>array(
+                        "title"=>"Listing",
+                        "icon"=>"fa-list-ol",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/sales/orders/index"
+                    ),
+                    "add"=>array(
+                        "title"=>"Add New",
+                        "icon"=>"fa-plus",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/sales/orders/add"
+                    )
+                ),
+            ),
+            "customers"=>array(
+                "title"=>"Customers",
+                "icon"=>"fa-group",
+                "sub"=>array(
+                    "list"=>array(
+                        "title"=>"Listing",
+                        "icon"=>"fa-list-ol",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/sales/customers/index"
+                    ),
+                    "add"=>array(
+                        "title"=>"Add New",
+                        "icon"=>"fa-plus",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/sales/customers/add"
+                    )
+                ),
+            ),
+            "returns"=>array(
+                "title"=>"Returns",
+                "icon"=>"fa-history",
+                "sub"=>array(
+                    "list"=>array(
+                        "title"=>"Listing",
+                        "icon"=>"fa-list-ol",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/sales/returns/index"
+                    ),
+                    "add"=>array(
+                        "title"=>"Add New",
+                        "icon"=>"fa-plus",
+                        "url"=>"/melkaycosmetics/melkaycos/public/backend/sales/returns/add"
+                    )
+                ),
+            )
+        ),
     ),
 	"frontend" => array(
 		"title" => "Frontend",
@@ -137,25 +191,25 @@ $page_nav = array(
 		        "sub" => array(
 		            "list" => array(
 		                "title" => "All Slides",
-		                "url" => "/melkay/public/backend/sliders/index"
+		                "url" => "/melkaycosmetics/melkaycos/public/backend/sliders/index"
 		            ),
 		            "slideimage" => array(
 		                "title" => "Manage Slide Image",
-		                "url" => "/melkay/public/backend/sliders/manageimages"
+		                "url" => "/melkaycosmetics/melkaycos/public/backend/sliders/manageimages"
 		            )
 		        )
 		    ),
             "menu" => array(
 				"title" => "Manage Frontend Menu",
-				"url" => "/melkay/public/backend/menu/index"
+				"url" => "/melkaycosmetics/melkaycos/public/backend/menu/index"
 			),
             "preview" => array(
 				"title" => "Preview Website",
-				"url" => "/melkay/public"
+				"url" => "/melkaycosmetics/melkaycos/public"
 			),
             "pageblock"=>array(
                 "title"=>"Page Blocks",
-                "url"=>"/melkay/public/backend/pageblocks/index"
+                "url"=>"/melkaycosmetics/melkaycos/public/backend/pageblocks/index"
             )
 		)
 	),
@@ -165,18 +219,18 @@ $page_nav = array(
         "sub"=>array(
             "list"=>array(
                 "title"=>"Admin Listing",
-                "url"=>"/melkay/public/backend/administrators/index"
+                "url"=>"/melkaycosmetics/melkaycos/public/backend/administrators/index"
             ),
             "addnew"=>array(
                 "title"=>"Add New",
-                "url"=>"/melkay/public/backend/administrators/addnew"
+                "url"=>"/melkaycosmetics/melkaycos/public/backend/administrators/addnew"
             )
         )
     ),
     "setting"=>array(
         "title"=>"Settings",
         "icon"=>"fa-wrench",
-        "url"=>"/melkay/public/backend/settings"
+        "url"=>"/melkaycosmetics/melkaycos/public/backend/settings"
     )
 );
 

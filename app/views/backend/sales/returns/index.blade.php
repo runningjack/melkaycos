@@ -2,10 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: Amedora
- * Date: 3/12/15
- * Time: 10:11 AM
+ * Date: 6/26/15
+ * Time: 4:23 AM
  */
-
 
 
 //initilize the page
@@ -14,7 +13,7 @@ require_once("inc/init.php");
 //require UI configuration (nav, ribbon, etc.)
 require_once("inc/config.ui.php");
 
-$page_title = "Price List";
+$page_title = "";
 
 /* ---------------- END PHP Custom Scripts ------------- */
 
@@ -107,7 +106,7 @@ $breadcrumbs["Stock Price"] =""
                                     </div>
                                     @endif
                                     <div class="text-right">
-                                        {{HTML::decode(HTML::linkRoute('prodaddnew','<span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Add New',null,array("class"=>"btn btn-labeled btn-primary")))}}
+                                        {{HTML::decode(HTML::linkRoute('addpcategory','<span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Add New',null,array("class"=>"btn btn-labeled btn-primary")))}}
                                     </div>
                                     <table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
                                         <thead>

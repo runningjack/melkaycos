@@ -236,7 +236,7 @@ require_once("inc/init.php");
     @endforeach
     @endif
 
-    
+
 
 </div>
 

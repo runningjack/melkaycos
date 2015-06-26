@@ -2,11 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: Amedora
- * Date: 3/12/15
- * Time: 10:11 AM
+ * Date: 6/26/15
+ * Time: 4:25 AM
  */
-
-
 
 //initilize the page
 require_once("inc/init.php");
@@ -14,28 +12,17 @@ require_once("inc/init.php");
 //require UI configuration (nav, ribbon, etc.)
 require_once("inc/config.ui.php");
 
-$page_title = "Price List";
+$page_title = "Customer List";
 
-/* ---------------- END PHP Custom Scripts ------------- */
-
-//include header
-//you can add your custom css in $page_css array.
-//Note: all css files are inside css/ folder
-$page_css[] = "your_style.css";
 include("inc/header.php");
 
 //include left panel (navigation)
 //follow the tree in inc/config.ui.php
-$page_nav["catalogue"]['sub']['product']['sub']['list']["active"] = false;
+$page_nav["sales"]['sub']['customers']['sub']['list']["active"] = false;
 include("inc/nav.php");
-$breadcrumbs["Stock Price"] =""
+$breadcrumbs["customers"] =""
 ?>
-    <style type="text/css">
-        #ui-datepicker-div,.ui-datepicker,.ui-datepicker-div
-        {
-            z-index: 9999999 !important;
-        }
-    </style>
+
     <script src="../../js/app.config.js"></script>
     <!-- ==========================CONTENT STARTS HERE ========================== -->
     <!-- MAIN PANEL -->
@@ -51,7 +38,7 @@ $breadcrumbs["Stock Price"] =""
         <div id="content">
             <div class="row">
                 <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-                    <h1 class="page-title txt-color-blue"><i class="fa-fw fa fa-code"></i> {{$p_title}}<span>> {{$subtitle}}</span></h1>
+                    <h1 class="page-title txt-color-blue"><i class="fa-fw fa fa-code"></i> {{$title}}<span>> {{$subtitle}}</span></h1>
                 </div>
 
             </div>
@@ -74,7 +61,7 @@ $breadcrumbs["Stock Price"] =""
 
                             <header>
                                 <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                                <h2>All Products </h2>
+                                <h2>Customers </h2>
 
                             </header>
 
@@ -107,7 +94,7 @@ $breadcrumbs["Stock Price"] =""
                                     </div>
                                     @endif
                                     <div class="text-right">
-                                        {{HTML::decode(HTML::linkRoute('prodaddnew','<span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Add New',null,array("class"=>"btn btn-labeled btn-primary")))}}
+                                        {{HTML::decode(HTML::linkRoute('cusadd','<span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span> Add New',null,array("class"=>"btn btn-labeled btn-primary")))}}
                                     </div>
                                     <table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
                                         <thead>
@@ -118,8 +105,13 @@ $breadcrumbs["Stock Price"] =""
                                             <th class="hasinput" style="width:17%">
                                                 <input type="text" class="form-control" placeholder="Filter Name" />
                                             </th>
-                                            <th style="width: 27%">
+                                            <th >
                                             </th>
+                                            <th >
+                                            </th>
+                                            <th >
+                                            </th>
+                                            <th ></th>
                                             <th style="width:17%">
                                             </th>
                                             <th class="hasinput icon-addon">
@@ -131,30 +123,36 @@ $breadcrumbs["Stock Price"] =""
                                         <tr>
                                             <th data-class="expand">SN</th>
                                             <td data-class="expand">Img</td>
-                                            <th data-hide="phone">Product Name</th>
-                                            <th data-hide="phone">Sort Order</th>
+                                            <th data-hide="phone">Customer Name</th>
+                                            <th data-hide="phone">Email</th>
+                                            <th data-hide="phone">Type</th>
+                                            <th data-hide="phone">Online Status</th>
+                                            <th data-hide="phone">IP Address</th>
                                             <th data-hide="phone,tablet">Date Crreated</th>
                                             <th data-hide="phone,tablet">Date Modified</th>
                                             <th data-hide="phone">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody id="listdata">
-                                        @if($products)
+                                        @if($customers)
                                         {{--*/$x=1/*--}}
-                                        @foreach($products as $product)
+                                        @foreach($customers as $customer)
                                         <tr>
                                             <td>{{$x}}</td>
-                                            <td><img src="{{\Croppa::url(ASSETS_URL.'/uploads/images/thumbs/'.$product->image, 50, 50)}}" ></td>
-                                            <td>{{$product->title}}</td>
-                                            <td>{{$product->sort_order}}</td>
-                                            <td>{{date_format(date_create($product->created_at),"d-m-Y")}}</td>
-                                            <td>{{date_format(date_create($product->updated_at),"d-m-Y")}}</td>
-                                            <td>{{HTML::linkRoute('prodedit',"Edit",$product->id)}}</td>
+                                            <td><img src="{{\Croppa::url(ASSETS_URL.'/uploads/images/thumbs/'.$customer->image, 50, 50)}}" ></td>
+                                            <td>{{$customer->firstname}} {{$customer->lastname}}</td>
+                                            <td>{{$customer->email}}</td>
+                                            <td>{{$customer->type}}</td>
+                                            <td>{{$customer->logged_in}}</td>
+                                            <td>{{$customer->ip}}</td>
+                                            <td>{{date_format(date_create($customer->created_at),"d-m-Y")}}</td>
+                                            <td>{{date_format(date_create($customer->updated_at),"d-m-Y")}}</td>
+                                            <td>{{HTML::linkRoute('cusedit',"Edit",$customer->id)}}</td>
                                         </tr>
                                         {{--*/$x++/*--}}
                                         @endforeach
                                         @else
-                                        <td colspan="6" >No listing available</td>
+                                        <td colspan="10" >No listing available</td>
                                         @endif
                                         </tbody>
                                     </table>
@@ -212,69 +210,6 @@ include("inc/scripts.php");
         $(document).ready(function() {
             // PAGE RELATED SCRIPTS
 
-            $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-                _title : function(title) {
-                    if (!this.options.title) {
-                        title.html("&#160;");
-                    } else {
-                        title.html(this.options.title);
-                    }
-                }
-            }));
-            $('#dialog_link').click(function() {
-                $('#dialog_simple').dialog('open');
-                return false;
-
-            });
-            $('#dialog_simple').dialog({
-                autoOpen : false,
-                width : 600,
-                resizable : false,
-                modal : true,
-                title : "<div class='widget-header'><h4><i class='fa fa-warning'></i> Stock Price List Batch Uplaod</h4></div>",
-
-            });
-
-            $('#dialog_link2').click(function() {
-                $('#dialog_simple2').dialog('open');
-                return false;
-
-            });
-            $('#dialog_simple2').dialog({
-                autoOpen : false,
-                width : 600,
-                resizable : false,
-                modal : true,
-                title : "<div class='widget-header'><h4><i class='fa fa-warning'></i> Stock Price Daily Upload</h4></div>",
-
-            });
-
-
-            $( "#mydate,#mydate2").datepicker({
-                showWeek: true,
-                firstDay: 1,
-                dateFormat: 'yy-mm-dd',
-                changeYear: true,
-                beforeShow: function(input) {
-                    setTimeout(function() {
-                        var widgetHeader = $(input).datepicker("widget").find(".ui-datepicker-header");
-                        var prevYrBtn = $('<button title="PrevYr">&lt;&lt; Prev Year</button>');
-                        prevYrBtn.unbind("click").bind("click", function() {
-                            $.datepicker._adjustDate($(input), -1, 'Y');
-
-                        });
-                        var nextYrBtn = $('<button title="NextYr">Next year &gt;&gt;</button>');
-                        nextYrBtn.unbind("click").bind("click", function() {
-                            $.datepicker._adjustDate($(input), +1, 'Y');
-
-                        });
-                        prevYrBtn.appendTo(widgetHeader);
-                        nextYrBtn.appendTo(widgetHeader);
-
-                    }, 1);
-                }
-            });
-
 
             /* BASIC ;*/
             var responsiveHelper_dt_basic = undefined;
@@ -321,7 +256,7 @@ include("inc/scripts.php");
             });
 
             // custom toolbar
-            $("div.toolbar").html('<div class="text-right"></div>');
+            $("div.toolbar").html('<div class="text-right">Customer List</div>');
 
             // Apply the filter
             $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {

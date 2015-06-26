@@ -133,6 +133,23 @@ Route::group(array('prefix' => 'backend'), function() {
     Route::post("options/addnew/{id?}", array("as"=>"optionaddpost","before"=>"auth","uses"=>"Backend\CatalogueController@postOptionAddNew"));
     Route::get("options/edit/{id?}", array("as"=>"optionedit","before"=>"auth","uses"=>"Backend\CatalogueController@getOptionEdit"));
 
+    /**
+     *Route for sales group
+     */
+
+    Route::get("sales/customers/index", array("as"=>"cuslist","before"=>"auth","uses"=>"Backend\SalesController@getCustomerIndex"));
+    Route::get("sales/customers/add/{id?}", array("as"=>"cusadd","before"=>"auth","uses"=>"Backend\SalesController@getCustomerAdd"));
+    Route::post("sales/customers/add/{id?}", array("as"=>"cusaddpost","before"=>"auth","uses"=>"Backend\SalesController@postCustomerAdd"));
+    Route::get("sales/customers/edit/{id?}", array("as"=>"cusedit","before"=>"auth","uses"=>"Backend\CatalogueController@getCustomerEdit"));
+
+
+    Route::get("sales/orders/index", array("as"=>"ordlist","before"=>"auth","uses"=>"Backend\SalesController@getOrderIndex"));
+    Route::get("sales/orders/add/{id?}", array("as"=>"ordadd","before"=>"auth","uses"=>"Backend\SalesController@getOrderAdd"));
+    Route::post("sales/orders/add/{id?}", array("as"=>"ordaddpost","before"=>"auth","uses"=>"Backend\SalesController@postOrderAdd"));
+    Route::get("sales/orders/edit/{id?}", array("as"=>"ordedit","before"=>"auth","uses"=>"Backend\SalesController@getOrderEdit"));
+
+    //End of sales groping route
+
 });
 
 
