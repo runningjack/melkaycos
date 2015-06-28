@@ -105,17 +105,17 @@ $breadcrumbs["orders"] =""
                                     <table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
                                         <thead>
                                         <tr>
-                                            <th style="width:7%">
+                                            <th>
                                             </th>
                                             <th></th>
-                                            <th class="hasinput" style="width:17%">
+                                            <th class="hasinput" style="width:27%">
                                                 <input type="text" class="form-control" placeholder="Filter Name" />
                                             </th>
                                             <th style="width: 2%">
                                             </th>
                                             <th style="width:8%">
                                             </th>
-                                            <th style="width:17%">
+                                            <th style="width:10%">
                                             </th>
                                             <th class="hasinput icon-addon">
                                                 <input id="dateselect_filter" type="text" placeholder="Filter Date Added" class="form-control datepicker" data-dateformat="yy/mm/dd">
@@ -140,9 +140,19 @@ $breadcrumbs["orders"] =""
                                         @foreach($orders as $order)
                                         <tr>
                                             <td>{{$x}}</td>
-                                            <td>{{$order->id}}</td>
+                                            <td>{{$order->invoice_no}}</td>
                                             <td>{{$order->firstname}} {{$order->lastname}}</td>
-                                            <td>{{$order->order_status_id}}</td>
+                                            <td>
+                                                <select oid="{{$order->id}}" id="status{{$order->id}}">
+                                                    <?php
+                                                    if($statuses){
+                                                        foreach($statuses as $status){
+                                                            echo"<option value='$status->order_status_id'>$status->name</option>";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value=""></option>
+                                                </select>
                                             <td>{{$order->total}}</td>
                                             <td>{{date_format(date_create($order->created_at),"d-m-Y")}}</td>
                                             <td>{{date_format(date_create($order->updated_at),"d-m-Y")}}</td>

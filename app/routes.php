@@ -140,7 +140,7 @@ Route::group(array('prefix' => 'backend'), function() {
     Route::get("sales/customers/index", array("as"=>"cuslist","before"=>"auth","uses"=>"Backend\SalesController@getCustomerIndex"));
     Route::get("sales/customers/add/{id?}", array("as"=>"cusadd","before"=>"auth","uses"=>"Backend\SalesController@getCustomerAdd"));
     Route::post("sales/customers/add/{id?}", array("as"=>"cusaddpost","before"=>"auth","uses"=>"Backend\SalesController@postCustomerAdd"));
-    Route::get("sales/customers/edit/{id?}", array("as"=>"cusedit","before"=>"auth","uses"=>"Backend\CatalogueController@getCustomerEdit"));
+    Route::get("sales/customers/edit/{id?}", array("as"=>"cusedit","before"=>"auth","uses"=>"Backend\SalesController@getCustomerEdit"));
 
 
     Route::get("sales/orders/index", array("as"=>"ordlist","before"=>"auth","uses"=>"Backend\SalesController@getOrderIndex"));

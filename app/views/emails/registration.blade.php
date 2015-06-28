@@ -17,7 +17,7 @@
     <style type="text/css">@media only screen and (max-width:480px){body,table,td,p,a,li,blockquote{-webkit-text-size-adjust:none !important}body{width:100% !important;min-width:100% !important}td[id=bodyCell]{padding:10px !important}table.kmMobileHide{display:none !important}table[class=kmTextContentContainer]{width:100% !important}table[class=kmBoxedTextContentContainer]{width:100% !important}td[class=kmImageContent]{padding-left:0 !important;padding-right:0 !important}img[class=kmImage]{width:100% !important}table[class=kmSplitContentLeftContentContainer],table[class=kmSplitContentRightContentContainer],table[class=kmColumnContainer],td[class=kmVerticalButtonBarContentOuter] table[class=kmButtonBarContent],td[class=kmVerticalButtonCollectionContentOuter] table[class=kmButtonCollectionContent],table[class=kmVerticalButton],table[class=kmVerticalButtonContent]{width:100% !important}td[class=kmButtonCollectionInner]{padding-left:9px !important;padding-right:9px !important;padding-top:9px !important;padding-bottom:0 !important;background-color:transparent !important}td[class=kmVerticalButtonIconContent],td[class=kmVerticalButtonTextContent],td[class=kmVerticalButtonContentOuter]{padding-left:0 !important;padding-right:0 !important;padding-bottom:9px !important}table[class=kmSplitContentLeftContentContainer] td[class=kmTextContent],table[class=kmSplitContentRightContentContainer] td[class=kmTextContent],table[class=kmColumnContainer] td[class=kmTextContent],table[class=kmSplitContentLeftContentContainer] td[class=kmImageContent],table[class=kmSplitContentRightContentContainer] td[class=kmImageContent]{padding-top:9px !important}td[class="rowContainer kmFloatLeft"],td[class="rowContainer kmFloatLeft firstColumn"],td[class="rowContainer kmFloatLeft lastColumn"]{float:left;clear:both;width:100% !important}table[id=templateContainer],table[class=templateRow]{max-width:600px !important;width:100% !important}h1{font-size:24px !important;line-height:130% !important}h2{font-size:20px !important;line-height:130% !important}h3{font-size:18px !important;line-height:130% !important}h4{font-size:16px !important;line-height:130% !important}td[class=kmTextContent]{font-size:14px !important;line-height:130% !important}td[class=kmTextBlockInner] td[class=kmTextContent]{padding-right:18px !important;padding-left:18px !important}table[class="kmTableBlock kmTableMobile"] td[class=kmTableBlockInner]{padding-left:9px !important;padding-right:9px !important}table[class="kmTableBlock kmTableMobile"] td[class=kmTableBlockInner] [class=kmTextContent]{font-size:14px !important;line-height:130% !important;padding-left:4px !important;padding-right:4px !important}}</style>
 </head>
 <body style="margin:0;padding:0;background-color:#c7c7c7">
-{{--*/$order = Order::find($order_id)/*--}}
+
 <center>
 <table align="center" border="0" cellpadding="0" cellspacing="0" id="bodyTable" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;background-color:#c7c7c7;height:100%;margin:0;width:100%">
 <tbody>
@@ -90,34 +90,14 @@
                 <tbody>
                 <tr>
                     <td class="kmTextContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:#505050;font-family:Helvetica, Arial;font-size:14px;line-height:150%;text-align:left;padding-top:9px;padding-bottom:18px;padding-left:18px;padding-right:18px;">
-                        <h3 style="color:#666;display:block;font-family:Helvetica, Arial;font-size:16px;font-style:normal;font-weight:normal;line-height:110%;letter-spacing:normal;margin:0;margin-bottom:9px;text-align:left">Billing Address:</h3>
+                        <p>On <a href="{{url()}}"> Melkaycosmetics.com</a>, you can purchase all your makeup and cosmetics needs at wholesale price, and have them shipped directly to your home or
+                        shop anywhere in Nigeria! You can also pick up your goods if you prefer at any of our pick stores across the country.</p>
 
-                        <p>Your order has been successfully registered.</p>
-                        <p>Next steps:</p>
-                        <ul>
-                            <li>We will get in touch with you to verify your phone number and shipping address</li>
-                            <li>Once verified, you will get an email confirmation</li>
-                            <li>If we cannot reach you within 24h and you have not received an order confirmation email, we will cancel your order.</li>
-                        </ul>
-                        <p>To check the status of your order online, please use our order tracker</p>
-                        <p style="margin:0;padding-bottom:0">&nbsp;</p>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
-    <tbody class="kmTextBlockOuter">
-    <tr>
-        <td class="kmTextBlockInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;">
-            <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmTextContentContainer" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
-                <tbody>
-                <tr>
-                    <td class="kmTextContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:#505050;font-family:Helvetica, Arial;font-size:14px;line-height:150%;text-align:left;padding-top:9px;padding-bottom:0px;padding-left:18px;padding-right:18px;">
-                        <h3 style="color:#666;display:block;font-family:Helvetica, Arial;font-size:16px;font-style:normal;font-weight:normal;line-height:110%;letter-spacing:normal;margin:0;margin-bottom:9px;text-align:left">Order Details:</h3>
+                        <p>Along with flexible options to pay with a credit card or cash on delivery,
+                        Melkay Cosmetics offers fantastic customer service, great prices, free returns and quality products that come with warranties.
+                        Enjoy an awesome shopping experience 24hours a day, 7 days a week!.</p>
+
+                        <p>If you need any assistance or have any inquiry or suggestion, feel free to contact us at info@melkaycosmetics.com</p>
                     </td>
                 </tr>
                 </tbody>

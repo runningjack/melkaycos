@@ -44,7 +44,7 @@ include("inc/nav.php");
                     </div>
                 </div>
             </section>
-            {{Form::open(array('action'=>array('Backend\CatalogueController@postProductAddNew', ""), 'method'=>'POST', 'class'=>'form-horizontal', 'files'=>true)) }}
+            {{Form::open(array('action'=>array('Backend\SalesController@postCustomerAdd', ""), 'method'=>'POST', 'class'=>'form-horizontal', 'files'=>true)) }}
             <div class="row">
                 <div class="col-md-9">
                     <div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-2" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" role="widget" style="">
@@ -91,10 +91,10 @@ include("inc/nav.php");
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab-r1">
-
+                                            <div class="form-group" style="margin: 0 !important;padding: 0 !important; text-align: center"> <h3>Basic Info</h3></div>
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">First Name <span class="color-black">*</span></label>
-                                                <div class="col-md-10">
+                                                <label class="col-md-2 col-2 control-label">First Name <span class="color-black">*</span></label>
+                                                <div class="col-md-10 col-10">
                                                     <input class="form-control" placeholder="Enter first name" id="firstname" name="firstname" type="text" required="required" value="{{\Input::old('firstname')}}" autocomplete="off">
                                                 </div>
                                             </div>
@@ -123,39 +123,85 @@ include("inc/nav.php");
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Password<span class="color-black">*</span></label>
                                                 <div class="col-md-10">
-                                                    <input class="form-control" placeholder="New Category Title" id="password" name="password" type="password" required="required" value="" autocomplete="off">
+                                                    <input class="form-control" placeholder="Enter password" id="password" name="password" type="password" required="required" value="" autocomplete="off">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="col-md-2 control-label">Confirm<span class="color-black">*</span></label>
                                                 <div class="col-md-10">
-                                                    <input class="form-control" placeholder="New Category Title" id="confirm" name="confirm" type="password" required="required" value="" autocomplete="off">
+                                                    <input class="form-control" placeholder="COnfirm password" id="confirm" name="confirm" type="password" required="required" value="" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab-r2">
+
+                                            <div class="form-group" style="margin: 0 !important;padding: 0 !important; text-align: center"> <h3>Address</h3></div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Company </label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" placeholder="Enter Company" id="company" name="company" type="text"  value="{{\Input::old('email')}}" autocomplete="off">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">Description</label>
+                                                <label class="col-md-2 control-label">Contact</label>
                                                 <div class="col-md-10">
-                                                    <textarea id="description" name="description" class="form-control">{{\Input::old('description')}}</textarea>
+                                                    <input class="form-control" placeholder="Enter contact person" id="contact" name="contact" type="text"  value="{{\Input::old('phone')}}" autocomplete="off">
                                                 </div>
                                             </div>
 
-                                            <p>
-                                                They say that love is more important than money, but have you ever tried to pay your bills with a hug?
-                                            </p>
-                                        </div>
-                                        <div class="tab-pane" id="tab-r2">
-                                            <p>
-                                                Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                                            </p>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Address 1<span class="color-black">*</span></label>
+                                                <div class="col-md-10">
+                                                   <textarea class="form-control" name="address" required ></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Apartment<span class="color-black">*</span></label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" placeholder="Enter contact Block/Floor/Room No etc" id="apartment" name="apartment" type="text"  value="{{\Input::old('phone')}}" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">City/Town<span class="color-black">*</span></label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" placeholder="Enter city" id="confirm" name="city" type="text" required="required" value="" autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Country <span class="color-black">*</span></label>
+                                                <div class="col-md-10">
+                                                    <select class="form-control" name="country" id="country" required="required">
+                                                        <option value="">Select a country…</option>
+                                                        @if($countries)
+                                                        @foreach($countries as $country)
+                                                        @if($country->name == "Nigeria")
+                                                        <option value="{{$country->name}}" selected>{{$country->name}}</option>
+                                                        @else
+                                                        <option value="{{$country->name}}">{{$country->name}}</option>
+                                                        @endif
+                                                        @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">State/Region <span class="color-black">*</span></label>
+                                                <div class="col-md-10">
+                                                    <input class="form-control" type="text" id="state" name="state" placeholder ="State / Country" required value="{{Input::old('state')}}">
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
                     </div>
@@ -235,5 +281,6 @@ include("inc/scripts.php");
 
 <?php
 //include footer
+\Session::flush();
 include("inc/google-analytics.php");
 ?>
