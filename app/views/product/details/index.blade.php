@@ -48,6 +48,12 @@ require_once("inc/init.php");
             </p>
 
         </div>
+        <div class="woocommerce-product-rating">
+            <div class="star-rating" title="Rated 4.00 out of 5">
+                <span style="width:80%"> <strong itemprop="ratingValue" class="rating">4.00</strong> out of 5 </span>
+            </div>
+            <span class="color-gray">(14)</span>
+        </div>
         <div class="clearfix"></div>
         <div class="space20">&nbsp;</div>
 
@@ -85,7 +91,8 @@ require_once("inc/init.php");
 
         <p>Available Options:</p>
         <div class="single-item-options">
-           <b>Quantity</b>    <select type="text" placeholder="enter quantity" name="qty" id="qty" class="wc-select">
+               <select type="text" placeholder="enter quantity" name="qty" id="qty" class="wc-select">
+                   <option value="">Qty</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -188,7 +195,7 @@ require_once("inc/init.php");
 <div class="woocommerce-tabs">
     <ul class="tabs">
         <li class="active"><a href="#tab-description">Description</a></li>
-        <li class=""><a href="#tab-reviews">Reviews (0)</a></li>
+        <li class=""><a href="#tab-reviews">Reviews <?php echo  isset($reviews) && count($reviews)>0 ? (count($reviews)) :"(0)"  ?></a></li>
     </ul>
 
     <div class="panel" id="tab-description" style="display: block;">
@@ -201,7 +208,80 @@ require_once("inc/init.php");
         ?>
     </div>
     <div class="panel" id="tab-reviews" style="display: none;">
-        <p>No Reviews</p>
+        <div class="row">
+            @if($reviews)
+                @foreach($reviews as $review)
+            <div class="beta-blog beta-blog-b">
+                <div class="beta-blog-header">
+                    <div class="media">
+                        <div class="media-body">
+                            <h5 class="beta-blog-title"><a href="single_type_slideshow.html">{{$review->comment_subject}}</a></h5>
+                            <p>By: <a href="#">{{$review->comment_author}}</a> | <a href="#">0 Comments</a> | <a href="#">{{date_format(date_create($review->created_at),"M")}},
+                                    {{date_format(date_create($review->created_at),"j")}} {{date_format(date_create($review->created_at),"Y")}}</a> </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row beta-blog-content">
+                    <div class="col-12">
+                        <div class="beta-blog-b-preview-container-all">
+                            <div class="beta-blog-b-preview-container">
+                                <span class="beta-blog-type"><i class="fa fa-picture-o"></i></span>
+										<span class="beta-blog-date">
+											<span class="beta-blog-month">{{date_format(date_create($review->created_at),"M")}}</span>
+											<span class="beta-blog-day">{{date_format(date_create($review->created_at),"j")}}</span>
+										</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="beta-blog-b-preview">
+                                <p>{{$review->comment_content}}</p>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+                @endforeach
+            <div class="space45">&nbsp;</div>
+            @endif
+
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <p><h5>Write your own review about this product</h5></p>
+                <div class="space20">&nbsp;</div>
+                <div class="msg"></div>
+                <div class="space20">&nbsp;</div>
+                <div class="form-block">
+                    <label for="nickname"><strong>Nick Name<span class="pink"> *</span></strong></label>
+                    <input type="text" id="nickname" name="nickname" placeholder="Nick Name" required >
+                    <input type="hidden" id="prodid" name="prodid" value="{{$myproduct->id}}" >
+                </div>
+
+                <div class="form-block">
+                    <label for="email"><strong>Email</strong></label>
+                    <input type="text" id="email" name="email" placeholder="Email" >
+                </div>
+
+                <div class="form-block">
+                    <label for="address"><strong>Summary of your review <span class="pink">*</span></strong></label>
+                    <input type="text" id="summary" name="summary_review" placeholder="Summary of Review" required >
+                </div>
+
+
+                <div class="form-block">
+                    <label for="review"><strong>Review <span class="pink">*</span></strong></label>
+                    <textarea id="review" name="review"  required ></textarea>
+                </div>
+            </div>
+            <div class="text-center"><button class="beta-btn primary btn_review">Submit Review <i class="fa fa-chevron-right"></i></button></div>
+        </div>
     </div>
 </div>
 

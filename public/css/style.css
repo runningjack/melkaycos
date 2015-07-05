@@ -975,7 +975,7 @@ width:200px;
 font-weight:lighter
 }
 
-.form-block input,.form-block select,.beta-form-checkout textarea {
+.form-block input,.form-block select,.form-block textarea,.beta-form-checkout textarea {
 width:60%;
 overflow:hidden
 }

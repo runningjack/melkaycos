@@ -176,6 +176,20 @@ $page_css[] = "your_style.css";
             return isNumberKey(evt)
         })
 
+        $(".btn_review").on("click",function(){
+           // var ip = getIp();
+            var request = $.ajax({
+                url:"",
+                type:"post",
+                data:{comment_content:$("#review").val(),comment_author:$("#nickname").val(),summary:$("#summary").val(),email:$("#email").val(),comment_post_id:$("#prodid").val()},
+                dataType:"html"
+            });
+
+            request.done(function(data){
+                $("div.msg").html(data);
+            });
+        })
+
 
         $(".buying").each(function(){
             $(this).on("change",function(){
@@ -220,6 +234,14 @@ $page_css[] = "your_style.css";
 
 
     });
+    function getIp(){
+        $.getJSON( "",
+            function(data){
+                return( data.host);
+            }
+        );
+    }
+
 
     function scrollToElement(selector, time, verticalOffset) {
         time = typeof(time) != 'undefined' ? time : 1000;

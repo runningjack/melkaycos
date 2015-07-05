@@ -976,6 +976,56 @@ class HomeController extends BaseController {
                 echo $itemHtml;
             }
 
+
+            if(isset($_POST['comment_content'])){
+                try{
+
+                    $input = Input::all();
+                    $validation = Comment::validate(Input::all());
+                    if($validation->fails()){
+                        echo " <div class='alert alert-danger fade in'>
+                    <button class='close' data-dismiss='alert'>×</button>
+                   ensure that required fields are filled
+                </div>";
+                    }else{
+                        $comment    = new Comment();
+                        $comment->comment_post_id   =   $input['comment_post_id'];
+                        $comment->comment_author_email             =   $input['email'];
+                        $comment->comment_author                    =   $input['comment_author'];
+                        $comment->comment_content                   =   $input['comment_content'];
+                        $comment->comment_subject                   =   $input['summary'];
+                        $comment->comment_author_ip                 = $this->get_ip();
+                        $comment->comment_approved                  =0;
+                        if($comment->save()){
+
+                            echo " <div class='alert alert-success fade in'>
+                    <button class='close' data-dismiss='alert'>×</button>
+                   Your review awaits approval
+                </div>";
+                        }
+                    }
+
+                } catch (Exception $e) {
+                    echo " <div class='alert alert-success fade in'>
+                    <button class='close' data-dismiss='alert'>×</button>
+                   ".$e->getMessage()."
+                </div>";
+
+                } catch(ValidationException $e) {
+                    echo " <div class='alert alert-success fade in'>
+                    <button class='close' data-dismiss='alert'>×</button>
+                   ".$e->getMessage()."
+                </div>";
+                }catch(Swift_RfcComplianceException $e){
+                    echo " <div class='alert alert-success fade in'>
+                    <button class='close' data-dismiss='alert'>×</button>
+                   ".$e->getMessage()."
+                </div>";
+                }
+
+
+        }
+
     }
     }
 
@@ -1036,6 +1086,7 @@ class HomeController extends BaseController {
                 ->with("moptions",$product_option_data)
                     ->with("categories",DB::table("categories")->get())
                     ->with("options",DB::table("options_values")->get())
+                    ->with("reviews",DB::table("comments")->where("comment_post_id","=",$product->id)->orderBy("id","DESC")->get())
                     ->with("productoptions",DB::table("products_options")->where("product_id","=",$product->id)->get())
                     ->with("related",DB::table("products")->where("brand_id",$product->brand_id)->where("id","!=",$product->id)->get())
                     ->with("brands",DB::table("brands")->get());
@@ -1589,5 +1640,36 @@ class HomeController extends BaseController {
         }
     }
 
+    public function get_ip() {
 
+        //Just get the headers if we can or else use the SERVER global
+        if ( function_exists( 'apache_request_headers' ) ) {
+
+            $headers = apache_request_headers();
+
+        } else {
+
+            $headers = $_SERVER;
+
+        }
+
+        //Get the forwarded IP if it exists
+        if ( array_key_exists( 'X-Forwarded-For', $headers ) && filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
+
+            $the_ip = $headers['X-Forwarded-For'];
+
+        } elseif ( array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers ) && filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 )
+        ) {
+
+            $the_ip = $headers['HTTP_X_FORWARDED_FOR'];
+
+        } else {
+
+            $the_ip = filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
+
+        }
+
+        return $the_ip;
+
+    }
 }
