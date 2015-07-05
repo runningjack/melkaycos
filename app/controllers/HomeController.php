@@ -38,7 +38,7 @@ class HomeController extends BaseController {
         }
 
         $latestproducts =DB::table('products')
-            ->orderBy('created_at', 'asc')->take(6)
+            ->orderBy('created_at', 'desc')->skip(6)->take(6)
             //
             ->get();
         $newproducts =DB::table('products')
@@ -449,10 +449,7 @@ class HomeController extends BaseController {
             //$order->payment_postcode    =   $input['']
             $order->payment_country         =   $input['country'];
 
-            $order->shipping_method         =   $input['shipping_method'];
-            $order->notes                   =   $input['notes'];
-            $order->total                   =   Cart::total();
-            $order->sub_total               =   Cart::total();
+
             /*Add independent items to the item table*/
             $input['email'] = $user->email;
             /**
@@ -529,10 +526,7 @@ class HomeController extends BaseController {
                             $order->shipping_state          =   $input['shipping_state'];
                             $order->shipping_country        =   $input['shipping_country'];
                         }
-                        $order->shipping_method         =   $input['shipping_method'];
-                        $order->notes                   =   $input['notes'];
-                        $order->total                   =   Cart::total();
-                        $order->sub_total               =   Cart::total();
+
 
                         /**
                         took away order->save for new customer
@@ -584,16 +578,19 @@ class HomeController extends BaseController {
                 //$order->payment_postcode    =   $input['']
                 $order->payment_country         =   $input['country'];
 
-                $order->shipping_method         =   $input['shipping_method'];
-                $order->notes                   =   $input['notes'];
-                $order->total                   =   Cart::total();
-                $order->sub_total               =   Cart::total();
+
                /**
                Took away order->save on non- registering customer
                 */
 
             }
         }
+
+        $order->shipping_method         =   $input['shipping_method'];
+        $order->notes                   =   $input['notes'];
+        $order->order_status_id         =   2;
+        $order->total                   =   Cart::total();
+        $order->sub_total               =   Cart::total();
 
         //save order and perform other functionality
 
@@ -745,7 +742,7 @@ class HomeController extends BaseController {
             $customer->password     =  Hash::make(Input::get("password"));
             if($customer->save()){
 
-                Mail::send('emails.register', $input, function($message) use($input) {
+                Mail::send('emails.registration', $input, function($message) use($input) {
                     $message->from("info@melkaycosmetics.com", "Melkay Cosmetics ");
                     $message->to($input['email'], "info@melkaycosmetics.com")->cc('ahmed@chroniclesoft.com')->subject("Registration ");
                 });
@@ -1066,7 +1063,7 @@ class HomeController extends BaseController {
                 //var_dump($catlist);
                 return View::make("product.category.index")
                     ->with("category",Category::find($path))
-                    ->with("products",DB::table("products")->whereIn('id', $catlist)->get())
+                    ->with("products",DB::table("products")->whereIn('id', $catlist)->orderBy("id","desc")->get())
                     ->with("categories",DB::table("categories")->get())
                     ->with("options",DB::table("products_options")->where("product_id","=",$path)->groupBy("option_type")->get())
                     ->with("subcategories",DB::table("categories")->where("parent_id",$path)->get())
@@ -1249,7 +1246,7 @@ class HomeController extends BaseController {
 
         if ($pbrand){
             return View::make("product.brands.index")
-                ->with("title",$pbrand->title)->with("products",DB::table("products")->where("brand_id",$pbrand->id)->get())
+                ->with("title",$pbrand->title)->with("products",DB::table("products")->where("brand_id",$pbrand->id)->orderBy("id","desc")->get())
                 ->with("categories",DB::table("categories")->get())
                 ->with("brands",DB::table("brands")->get());
         }

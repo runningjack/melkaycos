@@ -45,9 +45,10 @@ class AuthController extends BaseController {
             return Redirect::intended('account/index')->with("categories",DB::table("categories")->get());
 
         }else{
-            //return View::make('account/login')->with("categories",DB::table("categories")->get());
+            //
             \Session::put("error_message","Invalid username or password");
-            return \Redirect::back();
+            //return \Redirect::back();
+            return Redirect::to('account/login')->with("categories",DB::table("categories")->get());
         }
         }catch (Exception $e){
             \Session::put("error_message",$e->getMessage());
@@ -133,6 +134,9 @@ class AuthController extends BaseController {
                    return Redirect::intended('account/index');
                     // return Redirect::to('your_default_logged_in_page')->with('success', 'You have logged in successfully');
                 }
+            }else{
+                Session::put("error_message","Invalid username and password");
+                return Redirect::back();
             }
         }catch(Exception $e){
             Session::put("error_message",$e->getMessage());

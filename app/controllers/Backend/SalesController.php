@@ -20,6 +20,81 @@ class SalesController extends BackendController {
             ->with("title","Orders")->with("subtitle","List");
     }
 
+    public function postOrderIndex(){
+        if(isset($_POST['id']) && $_POST['action']=="status"){
+            $order = \Order::find($_POST['id']);
+            $order->order_status_id  =   $_POST['status'];
+            if($order->update()){
+                $input = \Input::all();
+
+                $orderstatus = \Orderstatus::find((int)$_POST['status']);
+
+                if($orderstatus->name == "Failed"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Failed";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Processing"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Processing";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Shipped"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Shipped";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Canceled"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Canceled";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Complete"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Complete";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Denied"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Denied";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Chargeback"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Chargeback";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Pending"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Pending";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Voided"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Voided";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Processed"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Processed";
+                    $input['message_text'] ="<p>Thank you for placing an order with Jumia. , we have being able to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Expired"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Expired";
+                    $input['message_text'] = "<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }elseif($orderstatus->name == "Canceled Reversal"){
+                    $input['subject'] ="Your order ".$order->invoice_no." Canceled Reversal";
+                    $input['message_text'] = "<p>Thank you for placing an order with Jumia. Unfortunately, we were unable to process the payment of your order.</p>";
+                    $input['message_text'] .="";
+                }
+
+                $input['firstname']     = $order->firstname;
+                $input['email']             =   $order->email;
+
+
+                \Mail::send('emails.orderemails', $input, function($message) use($input) {
+                    $message->from("info@melkaycosmetics.com", "Melkay Cosmetics ");
+                    $message->to($input['email'], $input['email'])->cc('webmaster@melkaycosmetics.com')->subject($input['subject']);
+                });
+
+                echo "Status Updated";
+            }else{
+                echo "Unexpected Error! Status could not be upaded";
+            }
+        }
+    }
+
     public function getCustomerAdd(){
         return \View::make("backend.sales.customers.add")->with("title","Add New Customer")->with("subtitle","")
             ->with("countries",\DB::table("country")->get());
@@ -72,9 +147,6 @@ class SalesController extends BackendController {
             foreach($input as $key=>$value){
                 $customer->$key = $value;
             }
-
-
-
                 $customer->password     =  \Hash::make(\Input::get("password"));
                 if($customer->save()){
 

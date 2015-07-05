@@ -183,7 +183,18 @@ require_once('inc/init.php');
 
                                         @if($myorders)
                                             @foreach($myorders as $order)
-                                            <tr><td>{{$order->invoice_no}}</td><td>{{$order->created_at}}</td><td>{{$order->total}}</td><td>{{$order->shipping_method}}</td><td>{{$order->payment_method}}</td><td></td></tr>
+                                            <tr><td>{{$order->invoice_no}}</td><td>{{$order->created_at}}</td><td>{{$order->total}}</td><td>{{$order->shipping_method}}</td><td>{{$order->payment_method}}</td><td>
+                                                    <?php
+                                                    if($statuses){
+                                                        foreach($statuses as $status){
+                                                            if($order->order_status_id == $status->id ){
+                                                                echo"$status->name";
+                                                            }
+
+                                                        }
+                                                    }
+                                                    ?>
+                                            </td></tr>
                                             @endforeach
                                         @else
                                         @endif

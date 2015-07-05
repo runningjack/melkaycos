@@ -7,6 +7,12 @@
  */
 require_once ('inc/init.php');
 ?>
+<?php
+if(Auth::account()->check()){
+    $user = Auth::account()->get();
+}
+
+?>
 @extends('layouts.nocart')
 @section('content')
 <div class="inner-header">
@@ -43,8 +49,10 @@ require_once ('inc/init.php');
             <div class="clearfix"></div>
         </div>-->
         <div class="space30">&nbsp;</div>
+        @if(!$user)
         <p class="beta-checkout-help">Returning customer? Login here</p>
         <div class="space50">&nbsp;</div>
+        @endif
 
         {{ Form::open(array('action'=>array('HomeController@postCheckout'), 'method'=>'POST',"id"=>"frm", 'class'=>'beta-form-checkout', 'files'=>true)) }}
         <div class="row">
@@ -95,52 +103,110 @@ require_once ('inc/init.php');
 
                     <div class="form-block">
                         <label for="firstname">First name*</label>
-                        <input type="text" id="firstname" name="firstname" required placeholder="first name">
+                        <input type="text" id="firstname" name="firstname" required placeholder="first name" value="<?php
+                        if($user){
+                            echo $user->firstname;
+                        }else{
+                            Input::old("firstname");
+                        }
+                        ?> ">
                     </div>
 
                     <div class="form-block">
                         <label for="your_last_name">Last name*</label>
-                        <input type="text" id="lastname" name="lastname" required placeholder="last name">
+                        <input type="text" id="lastname" name="lastname" required placeholder="last name" value="<?php
+                        if($user){
+                            echo $user->lastname;
+                        }else{
+                            Input::old("lastname");
+                        }
+                        ?> ">
                     </div>
 
                     <div class="form-block">
                         <label for="company">Company name</label>
-                        <input type="text" id="company" name="company" placeholder="company">
+                        <input type="text" id="company" name="company" placeholder="company"
+                               value="<?php
+                               if($user){
+                                   echo $user->company;
+                               }else{
+                                   Input::old("company");
+                               }
+                               ?> "
+                            >
                     </div>
 
                     <div class="form-block">
                         <label for="address">Address*</label>
-                        <input type="text" id="address" name="address" placeholder="Street Address" required>
-                        <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, unit etc." required>
+                        <input type="text" id="address" name="address" placeholder="Street Address" required value="<?php
+                        if($user){
+                            echo $user->address;
+                        }else{
+                            Input::old("address");
+                        }
+                        ?> ">
+                        <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, unit etc." required value="<?php
+                        if($user){
+                            echo $user->apartment;
+                        }else{
+                            Input::old("apartment");
+                        }
+                        ?> ">
                     </div>
 
                     <div class="form-block">
                         <label for="city">Town / City*</label>
-                        <input type="text" id="city" name="city" required placeholder="Town / City*">
+                        <input type="text" id="city" name="city" required placeholder="Town / City*" value="<?php
+                        if($user){
+                            echo $user->city;
+                        }else{
+                            Input::old("city");
+                        }
+                        ?> ">
                     </div>
 
                     <div class="form-block">
                         <label for="state">State/Region</label>
-                        <input type="text" id="state" name="state" placeholder ="State / Region">
+                        <input type="text" id="state" name="state" placeholder ="State / Region" value="<?php
+                        if($user){
+                            echo $user->state;
+                        }else{
+                            Input::old("state");
+                        }
+                        ?> ">
                     </div>
 
                     <div class="form-block">
                         <label for="email">Email address*</label>
-                        <input type="email" id="email" name="email" required placeholder="email">
+                        <input type="email" id="email" name="email" required placeholder="email" value="<?php
+                        if($user){
+                            echo $user->email;
+                        }else{
+                            Input::old("email");
+                        }
+                        ?> ">
                     </div>
 
                     <div class="form-block">
                         <label for="phone">Phone*</label>
-                        <input type="text" id="phone" name="phone" placeholder="phone" required>
+                        <input type="text" id="phone" name="phone" placeholder="phone" required value="<?php
+                        if($user){
+                            echo $user->phone;
+                        }else{
+                            Input::old("phone");
+                        }
+                        ?> ">
                     </div>
 
                     <div class="space20">&nbsp;</div>
+                    @if(!$user)
                     <p>
                         <input type="checkbox" name="create_account" id="create_account">
                         <label for="create_account"><span></span> Create an account?</label>
 
 
                     </p>
+
                     <div id="caccount" style="display:none">
                         <div class="space20">&nbsp;</div>
 
@@ -159,7 +225,7 @@ require_once ('inc/init.php');
                             <input type="password" name="confirmpassword"  id="confirmpassword" >
                         </div>
                     </div>
-
+                    @endif
                     <p>
                         <input type="checkbox" checked name="ship_billing" id="ship_billing">
                         <label for="ship_billing"><span></span> Deliver to Address Above</label>
@@ -210,7 +276,7 @@ require_once ('inc/init.php');
 
                         <div class="form-block">
                             <label for="shipping_city">Town / City*</label>
-                            <input type="text" id="shipping_city" name="shipping_city"  placeholder="Town / City*">
+                            <input type="text" id="shipping_city" name="shipping_city"   placeholder="Town / City*">
                         </div>
 
                         <div class="form-block">
@@ -377,7 +443,7 @@ require_once ('inc/init.php');
                                 </li>
 
                                 <li class="payment_method_paypal">
-                                    <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal">
+                                    <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to WebPay">
                                     <label for="payment_method_paypal">Webpay (Interswitch)</label>
                                     <div class="payment_box payment_method_paypal" style="display: none;">
                                         Pay using you credit card;

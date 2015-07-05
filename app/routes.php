@@ -144,6 +144,7 @@ Route::group(array('prefix' => 'backend'), function() {
 
 
     Route::get("sales/orders/index", array("as"=>"ordlist","before"=>"auth","uses"=>"Backend\SalesController@getOrderIndex"));
+    Route::post("sales/orders/index", array("as"=>"postordlist","before"=>"auth","uses"=>"Backend\SalesController@postOrderIndex"));
     Route::get("sales/orders/add/{id?}", array("as"=>"ordadd","before"=>"auth","uses"=>"Backend\SalesController@getOrderAdd"));
     Route::post("sales/orders/add/{id?}", array("as"=>"ordaddpost","before"=>"auth","uses"=>"Backend\SalesController@postOrderAdd"));
     Route::get("sales/orders/edit/{id?}", array("as"=>"ordedit","before"=>"auth","uses"=>"Backend\SalesController@getOrderEdit"));

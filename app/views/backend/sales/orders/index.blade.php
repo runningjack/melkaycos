@@ -143,16 +143,21 @@ $breadcrumbs["orders"] =""
                                             <td>{{$order->invoice_no}}</td>
                                             <td>{{$order->firstname}} {{$order->lastname}}</td>
                                             <td>
-                                                <select oid="{{$order->id}}" id="status{{$order->id}}">
+                                                <select oid="{{$order->id}}" id="status{{$order->id}}" class="status" style="display: inline !important">
                                                     <?php
                                                     if($statuses){
                                                         foreach($statuses as $status){
-                                                            echo"<option value='$status->order_status_id'>$status->name</option>";
+                                                            if($order->order_status_id == $status->id ){
+                                                                echo"<option value='$status->id' selected>$status->name</option>";
+                                                            }else{
+                                                                echo"<option value='$status->id'>$status->name</option>";
+                                                            }
+
                                                         }
                                                     }
                                                     ?>
                                                     <option value=""></option>
-                                                </select>
+                                                </select><span style="display: inline !important"></span>
                                             <td>{{$order->total}}</td>
                                             <td>{{date_format(date_create($order->created_at),"d-m-Y")}}</td>
                                             <td>{{date_format(date_create($order->updated_at),"d-m-Y")}}</td>
@@ -175,12 +180,7 @@ $breadcrumbs["orders"] =""
 
                     </article>
                     <!-- WIDGET END -->
-
                     <!-- NEW WIDGET START -->
-
-
-
-
                     <!-- WIDGET END -->
 
                 </div>
@@ -219,21 +219,36 @@ include("inc/scripts.php");
         $(document).ready(function() {
             // PAGE RELATED SCRIPTS
 
+            $(".status").each(function(){
+                $(this).on("change",function(){
+                    c = $(this).siblings("span")
+                    c.html("<img src='{{url()}}/img/loading.gif'/>")
+                    var d = $(this).attr("oid");
+                    var request = $.ajax({
+                        url: "",
+                        method: "POST",
+                        data: {id :d,action:"status",status:$(this).val()},
+                        dataType: "html"
+                    });
+                    request.done(function(resp) {
+                        c.html("<div class='alert alert-success fade in'><button class='close' data-dismiss='alert'>×</button><i class='fa-fw fa fa-check'></i><strong>Success</strong> "+resp+"</div><span style='color:'><span>");
+                    });
+                    request.fail(function( jqXHR, textStatus ) {
+                        c.html("<div class='alert alert-danger fade in'><button class='close' data-dismiss='alert'>×</button><i class='fa-fw fa fa-check'></i>"+jqXHR+" "+textStatus+"</div><span style='color:'><span>");
+                    });
+                })
+            })
+
             /* BASIC ;*/
             var responsiveHelper_dt_basic = undefined;
             var responsiveHelper_datatable_fixed_column = undefined;
             var responsiveHelper_datatable_col_reorder = undefined;
             var responsiveHelper_datatable_tabletools = undefined;
-
             var breakpointDefinition = {
                 tablet : 1024,
                 phone : 480
             };
-
-
-
             /* END BASIC */
-
 
             /* COLUMN FILTER  */
             var otable = $('#datatable_fixed_column').DataTable({
@@ -275,10 +290,6 @@ include("inc/scripts.php");
                     .draw();
 
             } );
-            /* END COLUMN FILTER */
-
-            //yyyy-mm-dd hh:ii
-
         })
 
     </script>
