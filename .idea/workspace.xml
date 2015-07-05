@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3c7c0ae-52a5-4f41-8054-0f1d37f208c9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/emails/orderemails.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/AuthController.php" afterPath="$PROJECT_DIR$/app/controllers/AuthController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/controllers/HomeController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/Account/AuthController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/Account/HomeController.php" afterPath="$PROJECT_DIR$/app/controllers/Account/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/Backend/SalesController.php" afterPath="$PROJECT_DIR$/app/controllers/Backend/SalesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/backend/sales/orders/add.blade.php" afterPath="$PROJECT_DIR$/app/views/backend/sales/orders/add.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/checkout.blade.php" afterPath="$PROJECT_DIR$/app/views/checkout.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/backend/options/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/backend/options/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/account/index.blade.php" afterPath="$PROJECT_DIR$/app/views/account/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/backend/sales/orders/index.blade.php" afterPath="$PROJECT_DIR$/app/views/backend/sales/orders/index.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/register.blade.php" afterPath="$PROJECT_DIR$/app/views/register.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -35,37 +31,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="159" column="108" selection-start="11313" selection-end="11344" vertical-scroll-proportion="-5.45098" vertical-offset="776" max-vertical-offset="1275">
+              <folding>
+                <element signature="e#3061#10980#0" expanded="false" />
+                <element signature="e#9111#9153#0" expanded="false" />
+                <element signature="e#9703#9742#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="867">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/Account/AuthController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="14" selection-start="544" selection-end="544" vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="4216">
+              <folding>
+                <element signature="e#1310#2184#0" expanded="false" />
+                <element signature="e#2287#2818#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="HomeController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.php">
+        <entry file="file://$PROJECT_DIR$/app/controllers/Account/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1047" column="30" selection-start="54186" selection-end="54196" vertical-scroll-proportion="0.0" vertical-offset="17799" max-vertical-offset="27183">
+            <state line="20" column="86" selection-start="427" selection-end="427" vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="510">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/product/category/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="40" selection-start="4783" selection-end="4789" vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="2584">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catalog.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/catalog.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="19" selection-start="2538" selection-end="2538" vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="1479">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.blade.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/account/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="73" selection-start="10716" selection-end="10725" vertical-scroll-proportion="0.0" vertical-offset="2515" max-vertical-offset="4097">
+            <state line="229" column="0" selection-start="12323" selection-end="12323" vertical-scroll-proportion="0.89506173" vertical-offset="3458" max-vertical-offset="4012">
               <folding />
             </state>
           </provider>
@@ -74,51 +86,25 @@
       <file leaf-file-name="AccountController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/Account/AccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="238">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/Account/HomeController.php">
+      <file leaf-file-name="index.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/backend/options/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="19" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="459">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="5338">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes.php">
+      <file leaf-file-name="register.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/register.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="48" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="2924">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CatalogueController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/Backend/CatalogueController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="275" column="0" selection-start="13229" selection-end="13229" vertical-scroll-proportion="-8.350877" vertical-offset="4675" max-vertical-offset="10710">
-              <folding>
-                <element signature="e#391#1530#0" expanded="false" />
-                <element signature="e#1536#10029#0" expanded="false" />
-                <element signature="e#10035#11227#0" expanded="false" />
-                <element signature="e#11233#11445#0" expanded="false" />
-                <element signature="e#11451#13109#0" expanded="false" />
-                <marker date="1434992284218" expanded="false" signature="13423:13450" placeholder="..." />
-                <marker date="1434992284218" expanded="false" signature="14025:14052" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/account/login.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1241">
+            <state line="18" column="30" selection-start="438" selection-end="438" vertical-scroll-proportion="81.03846" vertical-offset="2328" max-vertical-offset="2941">
               <folding />
             </state>
           </provider>
@@ -127,7 +113,16 @@
       <file leaf-file-name="AuthController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="43" selection-start="1302" selection-end="1312" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="5134">
+            <state line="50" column="43" selection-start="1302" selection-end="1312" vertical-scroll-proportion="-26.153847" vertical-offset="0" max-vertical-offset="4964">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nosidebar.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layouts/nosidebar.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="68" column="15" selection-start="2217" selection-end="2217" vertical-scroll-proportion="-41.192307" vertical-offset="0" max-vertical-offset="3808">
               <folding />
             </state>
           </provider>
@@ -150,7 +145,6 @@
         <option value="$PROJECT_DIR$/app/views/product/category/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/product/brands/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/catalog.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/register.blade.php" />
         <option value="$PROJECT_DIR$/app/views/emails/resgistration.php" />
         <option value="$PROJECT_DIR$/app/views/emails/resgistration.blade.php" />
         <option value="$PROJECT_DIR$/app/views/cart.blade.php" />
@@ -176,7 +170,6 @@
         <option value="$PROJECT_DIR$/app/views/backend/sales/customers/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/views/backend/sales/customers/add.blade.php" />
         <option value="$PROJECT_DIR$/app/models/Orderstatus.php" />
-        <option value="$PROJECT_DIR$/app/routes.php" />
         <option value="$PROJECT_DIR$/app/views/emails/orderemails.php" />
         <option value="$PROJECT_DIR$/app/views/backend/sales/orders/index.blade.php" />
         <option value="$PROJECT_DIR$/app/views/backend/emails/orderemails.blade.php" />
@@ -184,10 +177,14 @@
         <option value="$PROJECT_DIR$/app/views/backend/sales/orders/add.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/Backend/SalesController.php" />
         <option value="$PROJECT_DIR$/app/views/checkout.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/account/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/Account/HomeController.php" />
         <option value="$PROJECT_DIR$/app/controllers/AuthController.php" />
         <option value="$PROJECT_DIR$/app/controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/app/views/backend/options/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/register.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/Account/HomeController.php" />
+        <option value="$PROJECT_DIR$/app/routes.php" />
+        <option value="$PROJECT_DIR$/app/controllers/Account/AuthController.php" />
+        <option value="$PROJECT_DIR$/app/views/account/index.blade.php" />
       </list>
     </option>
   </component>
@@ -322,33 +319,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="product" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="melkaycos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="melkaycos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="product" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="category" />
+              <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -389,28 +360,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="melkaycos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="melkaycos" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Backend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -498,7 +447,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="728" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -537,36 +486,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/emails/orderconfirmation.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="250" column="12" selection-start="0" selection-end="27783" vertical-scroll-proportion="0.0" vertical-offset="4063" max-vertical-offset="6256" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/product/details/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="0" selection-start="7430" selection-end="7430" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4199" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/product/brands/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="145" selection-start="2086" selection-end="2215" vertical-scroll-proportion="-3.4313726" vertical-offset="760" max-vertical-offset="1360" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/product/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="589" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/product/details/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="48" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.67741936" vertical-offset="255" max-vertical-offset="4199" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/img/logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="39" selection-start="572" selection-end="572" vertical-scroll-proportion="0.6761364" vertical-offset="0" max-vertical-offset="90678" />
@@ -723,7 +642,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="74" column="77" selection-start="9451" selection-end="9451" vertical-scroll-proportion="9.254902" vertical-offset="1730" max-vertical-offset="2363">
           <folding>
-            <element signature="e#6#88#0" expanded="true" />
+            <element signature="e#6#88#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -744,47 +663,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="150" column="56" selection-start="7229" selection-end="7930" vertical-scroll-proportion="-4.730769" vertical-offset="2427" max-vertical-offset="5253">
           <folding>
-            <element signature="e#6#88#0" expanded="true" />
+            <element signature="e#6#88#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/register.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="22" selection-start="4700" selection-end="4700" vertical-scroll-proportion="0.0" vertical-offset="1921" max-vertical-offset="3026" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/account/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="73" selection-start="10716" selection-end="10725" vertical-scroll-proportion="0.0" vertical-offset="2515" max-vertical-offset="4097">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/Account/AccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="550">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/account/login.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1241">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/Account/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="19" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="43" selection-start="1302" selection-end="1312" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="5134">
           <folding />
         </state>
       </provider>
@@ -810,25 +696,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="48" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="2924">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/Backend/CatalogueController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="275" column="0" selection-start="13229" selection-end="13229" vertical-scroll-proportion="-8.350877" vertical-offset="4675" max-vertical-offset="10710">
+        <state line="275" column="0" selection-start="13229" selection-end="13229" vertical-scroll-proportion="133.38461" vertical-offset="3859" max-vertical-offset="10710">
           <folding>
             <element signature="e#391#1530#0" expanded="false" />
             <element signature="e#1536#10029#0" expanded="false" />
             <element signature="e#10035#11227#0" expanded="false" />
             <element signature="e#11233#11445#0" expanded="false" />
             <element signature="e#11451#13109#0" expanded="false" />
-            <marker date="1434992284218" expanded="false" signature="13423:13450" placeholder="..." />
-            <marker date="1434992284218" expanded="false" signature="14025:14052" placeholder="..." />
+            <marker date="1434992284218" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1434992284218" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/options/addnew.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="441" column="0" selection-start="88" selection-end="20699" vertical-scroll-proportion="-11.230769" vertical-offset="7120" max-vertical-offset="7701">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/options/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="219" column="21" selection-start="11364" selection-end="11364" vertical-scroll-proportion="-11.769231" vertical-offset="3417" max-vertical-offset="7786">
+          <folding>
+            <element signature="e#6#88#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#header#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/backend/options/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5338">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/nosidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="15" selection-start="2217" selection-end="2217" vertical-scroll-proportion="-41.192307" vertical-offset="0" max-vertical-offset="3808">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="43" selection-start="1302" selection-end="1312" vertical-scroll-proportion="-26.153847" vertical-offset="0" max-vertical-offset="4964">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/Account/AccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="550">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/register.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="30" selection-start="438" selection-end="438" vertical-scroll-proportion="81.03846" vertical-offset="2328" max-vertical-offset="2941">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="867">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/Account/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="86" selection-start="427" selection-end="427" vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="108" selection-start="11313" selection-end="11344" vertical-scroll-proportion="-5.45098" vertical-offset="776" max-vertical-offset="1275">
+          <folding>
+            <element signature="e#3061#10980#0" expanded="false" />
+            <element signature="e#9111#9153#0" expanded="false" />
+            <element signature="e#9703#9742#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/Account/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="14" selection-start="544" selection-end="544" vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="4216">
+          <folding>
+            <element signature="e#1310#2184#0" expanded="false" />
+            <element signature="e#2287#2818#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/account/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="229" column="0" selection-start="12323" selection-end="12323" vertical-scroll-proportion="0.89506173" vertical-offset="3458" max-vertical-offset="4012">
+          <folding />
         </state>
       </provider>
     </entry>

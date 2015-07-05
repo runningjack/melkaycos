@@ -49,7 +49,7 @@ Route::post("pages/contactus/{id?}",array("as"=>"cont","uses"=>"HomeController@p
 
 
 Route::group(array('prefix' => 'account'), function() {
-Route::get("/index",array("as"=>"account_home",'before' => 'auth',"uses"=>"Account\HomeController@getAccountIndex"));
+Route::get("/index/",array("as"=>"account_home",'before' => 'auth',"uses"=>"Account\HomeController@getAccountIndex"));
 });
 
 Route::get('uploads/images/{path}', function() {
@@ -157,7 +157,7 @@ Route::group(array('prefix' => 'backend'), function() {
 //Route::get('backend/login', 'AuthController@getLogin');
 Route::get('login/{target?}',array("as"=>"login","uses"=>'AuthController@getLogin'));
 Route::get('account/login/{target?}',array("as"=>"accountlogin","uses"=>'AuthController@getAccountLogin'));
-Route::post('account/login/{target?}', 'AuthController@postAccountLogin');
+Route::post('account/login/{target?}',array("as"=>"acc_log","uses"=>'Account\AuthController@postAccountLogin') );
 //Route::post('login', 'AuthController@postLogin');
 Route::post('login/{target?}', 'AuthController@postLogin');
 Route::get('logout', array("as"=>"logout","uses"=>'AuthController@getLogout'));

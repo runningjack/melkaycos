@@ -151,7 +151,7 @@ require_once("inc/init.php")
                             <h5>Sign In</h5>
 
                             <div class="space40">&nbsp;</div>
-                            {{ Form::open(array('action'=>array('AuthController@postAccountLogin'), 'method'=>'POST', 'class'=>'form-horizontal')) }}
+                            {{ Form::open(array('action'=>array('Account\AuthController@postAccountLogin'), 'method'=>'POST', 'class'=>'form-horizontal')) }}
                                 <p><input type="text" class="col-3" name="email" id="email" placeholder="Email"></p>
                                 <p><input type="password" class="col-3" name="password" placeholder="Password"></p>
                                 <p><button type="submit" class="btn btn-primary">Sign in</button>
